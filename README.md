@@ -17,8 +17,8 @@ This tool can quickly convert subtitles format from one format to SubRip (SRT) f
 ### Bundled Automatic Encoding Converter 
 You don't worry about encoding problem. This software will detect your subtitle encoding type and convert into UTF-8.
 
-### Subtitle Renamer
-This tool will rename all subtitle names to match with videos. It will save your time.
+### Subtitle Renamer (Optional)
+This software will rename all subtitle names to match with videos. It will save your time. 
 
 ### Batch Conversion
 You can convert all supported formats with one command line.
