@@ -15,14 +15,36 @@ This tool can quickly convert subtitles format from one format to SubRip (SRT) f
 ### Bundled Automatic Encoding Converter 
 You don't worry about encoding problem. This software will detect your subtitle encoding type and convert into UTF-8.
 
-### Subtitle Renamer (Optional)
-This software will rename all subtitle names to match with videos. It will save your time. 
-
 ### Batch Conversion
 You can convert all supported formats with one command line.
 
-## Usages
-This project is not completed yet. Coming Soon.
+## Downloads
+
+### Windows:
+Download `SRTSubtitleConverter-Win64.exe`.
+
+### Linux:
+Download `SRTSubtitleConverter-Linux` from Releases and run following commands:
+```
+$ chmod 777 SRTSubtitleConverter-Linux
+$ chmod +x SRTSubtitleConverter-Linux
+$ ./SRTSubtitleConverter-Linux
+```
+Tested with Ubuntu 20.04.
+
+### macOS:
+Download `SRTSubtitleConverter-macOS` from Releases and run following commands:
+```
+$ ./SRTSubtitleConverter-macOS
+```
+Tested with macOS 10.15.
+
+## How To Use
+```
+-i, --input      Required. Set the files or folders to be converted.
+-o, --output     Required. Set the path to save the converted files.
+-b, --batch      Set if you want to convert all supported files in a folder.
+```
 
 ## Requirements
 This software will work with Windows, Linux and macOS.
