@@ -30,13 +30,14 @@ $ chmod 777 SRTSubtitleConverter-Linux
 $ chmod +x SRTSubtitleConverter-Linux
 $ ./SRTSubtitleConverter-Linux
 ```
-Tested with Ubuntu 20.04 Only.
+Tested with Ubuntu 20.04.
 
 ### macOS:
-Install DotNet Core 3.1 or above, download `SRTSubtitleConverter.zip`, unzip it and run in your terminal:
+Download `SRTSubtitleConverter-macOS` from Releases and run following commands:
 ```
-$ dotnet SRTSubtitleConverter.dll
+$ ./SRTSubtitleConverter-Linux
 ```
+Tested with Ubuntu 20.04.
 
 ## How To Use
 ```
