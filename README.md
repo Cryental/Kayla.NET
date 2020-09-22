@@ -6,6 +6,7 @@ This tool can quickly convert subtitles format from one format to SubRip (SRT) f
 ### Support Subtitles File Format Conversion From:
 - SAMI (Synchronized Accessible Media Interchange)
 - SubStation Alpha (or ASS)
+- MicroDVD
 - WebVTT (Web Video Text Tracks)
 - Youtube Specific XML Format
 - SubViewer
