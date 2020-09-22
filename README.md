@@ -11,7 +11,6 @@ This tool can quickly convert subtitles format from one format to SubRip (SRT) f
 - WebVTT (Web Video Text Tracks)
 - Youtube Specific XML Format
 - TTML
-- MicroDVD
 
 ### Bundled Automatic Encoding Converter 
 You don't worry about encoding problem. This software will detect your subtitle encoding type and convert into UTF-8.
