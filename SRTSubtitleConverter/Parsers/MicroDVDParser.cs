@@ -15,21 +15,17 @@ namespace SRTSubtitleConverter.Parsers
         private const string LineRegex = @"^[{\[](-?\d+)[}\]][{\[](-?\d+)[}\]](.*)";
 
         private readonly char[] _lineSeparators = {'|'};
-        private readonly float defaultFrameRate = 23.976f;
 
-        public MicroDVDParser()
-        {
-        }
-
-        public MicroDVDParser(float defaultFrameRate)
-        {
-            this.defaultFrameRate = defaultFrameRate;
-        }
-
+        public float DefaultFrameRate { get; set; } = 23.976f;
         public string FileExtension { get; set; } = ".sub";
 
-        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
+        public bool ParseFormat(string path, out List<SubtitleItem> result)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var detect = CharsetDetector.DetectFromFile(path);
+            var encoding = Encoding.GetEncoding(detect.Detected.EncodingName);
+
             var subStream = new StreamReader(path, encoding).BaseStream;
 
             if (!subStream.CanRead || !subStream.CanSeek)
@@ -51,13 +47,13 @@ namespace SRTSubtitleConverter.Parsers
             if (line != null)
             {
                 float frameRate;
-                var firstItem = ParseLine(line, defaultFrameRate);
+                var firstItem = ParseLine(line, DefaultFrameRate);
                 if (firstItem.Text != null && firstItem.Text.Any())
                 {
                     var success = TryExtractFrameRate(firstItem.Text, out frameRate);
                     if (!success)
                     {
-                        frameRate = defaultFrameRate;
+                        frameRate = DefaultFrameRate;
 
                         items.Add(firstItem);
                     }
@@ -69,7 +65,7 @@ namespace SRTSubtitleConverter.Parsers
                 }
                 else
                 {
-                    frameRate = defaultFrameRate;
+                    frameRate = DefaultFrameRate;
                 }
 
                 line = reader.ReadLine();
@@ -93,44 +89,6 @@ namespace SRTSubtitleConverter.Parsers
 
             result = null;
             return false;
-        }
-
-        public string ToSRT(string path)
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            var result = CharsetDetector.DetectFromFile(path);
-            var encoding = Encoding.GetEncoding(result.Detected.EncodingName);
-
-            var resFormat = ParseFormat(path, encoding, out var data);
-
-            if (!resFormat)
-            {
-                return string.Empty;
-            }
-
-            var finalString = "";
-
-            for (var i = 0; i < data.Count; i++)
-            {
-                var number = i;
-                var startTime = Converters.ConvertMilliSecondsToString(data[i].StartTime);
-
-                var endTime = Converters.ConvertMilliSecondsToString(data[i].EndTime);
-
-                var text = data[i].Text;
-
-                var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
-
-                if (i != data.Count - 1)
-                {
-                    format += "\r\n\r\n";
-                }
-
-                finalString += format;
-            }
-
-            return finalString;
         }
 
         private string ConvertString(string str)
@@ -192,7 +150,7 @@ namespace SRTSubtitleConverter.Parsers
                 return success;
             }
 
-            frameRate = defaultFrameRate;
+            frameRate = DefaultFrameRate;
             return false;
         }
     }

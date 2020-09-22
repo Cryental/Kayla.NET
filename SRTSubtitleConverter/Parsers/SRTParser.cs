@@ -9,10 +9,10 @@ using UtfUnknown;
 
 namespace SRTSubtitleConverter.Parsers
 {
-    public class VTTParser : ISubtitleParser
+    public class SRTParser : ISubtitleParser
     {
         private readonly string[] _delimiters = {"-->", "- >", "->"};
-        public string FileExtension { get; set; } = ".vtt";
+        public string FileExtension { get; set; } = ".srt";
 
         public bool ParseFormat(string path, out List<SubtitleItem> result)
         {
@@ -21,25 +21,26 @@ namespace SRTSubtitleConverter.Parsers
             var detect = CharsetDetector.DetectFromFile(path);
             var encoding = Encoding.GetEncoding(detect.Detected.EncodingName);
 
-            var vttStream = new StreamReader(path, encoding).BaseStream;
-            if (!vttStream.CanRead || !vttStream.CanSeek)
+            var srtStream = new StreamReader(path, encoding).BaseStream;
+
+            if (!srtStream.CanRead || !srtStream.CanSeek)
             {
                 result = null;
                 return false;
             }
 
-            vttStream.Position = 0;
+            srtStream.Position = 0;
 
-            var reader = new StreamReader(vttStream, encoding, true);
+            var reader = new StreamReader(srtStream, encoding, true);
 
             var items = new List<SubtitleItem>();
-            var vttSubParts = GetVttSubTitleParts(reader).ToList();
-            if (vttSubParts.Any())
+            var srtSubParts = GetSrtSubTitleParts(reader).ToList();
+            if (srtSubParts.Any())
             {
-                foreach (var vttSubPart in vttSubParts)
+                foreach (var srtSubPart in srtSubParts)
                 {
                     var lines =
-                        vttSubPart.Split(new[] {Environment.NewLine}, StringSplitOptions.None)
+                        srtSubPart.Split(new[] {Environment.NewLine}, StringSplitOptions.None)
                             .Select(s => s.Trim())
                             .Where(l => !string.IsNullOrEmpty(l))
                             .ToList();
@@ -72,8 +73,14 @@ namespace SRTSubtitleConverter.Parsers
                     }
                 }
 
-                result = items;
-                return true;
+                if (items.Any())
+                {
+                    result = items;
+                    return true;
+                }
+
+                result = null;
+                return false;
             }
 
             result = null;
@@ -102,7 +109,7 @@ namespace SRTSubtitleConverter.Parsers
             }
         }
 
-        private IEnumerable<string> GetVttSubTitleParts(TextReader reader)
+        private IEnumerable<string> GetSrtSubTitleParts(TextReader reader)
         {
             string line;
             var sb = new StringBuilder();
@@ -141,33 +148,19 @@ namespace SRTSubtitleConverter.Parsers
                 return false;
             }
 
-            startTc = ParseVttTimecode(parts[0]);
-            endTc = ParseVttTimecode(parts[1]);
+            startTc = ParseSrtTimecode(parts[0]);
+            endTc = ParseSrtTimecode(parts[1]);
             return true;
         }
 
-        private int ParseVttTimecode(string s)
+        private static int ParseSrtTimecode(string s)
         {
-            var timeString = string.Empty;
-            var match = Regex.Match(s, "[0-9]+:[0-9]+:[0-9]+[,\\.][0-9]+");
+            var match = Regex.Match(s, "[0-9]+:[0-9]+:[0-9]+([,\\.][0-9]+)?");
             if (match.Success)
             {
-                timeString = match.Value;
-            }
-            else
-            {
-                match = Regex.Match(s, "[0-9]+:[0-9]+[,\\.][0-9]+");
-                if (match.Success)
-                {
-                    timeString = "00:" + match.Value;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(timeString))
-            {
-                timeString = timeString.Replace(',', '.');
+                s = match.Value;
                 TimeSpan result;
-                if (TimeSpan.TryParse(timeString, out result))
+                if (TimeSpan.TryParse(s.Replace(',', '.'), out result))
                 {
                     var nbOfMs = (int) result.TotalMilliseconds;
                     return nbOfMs;

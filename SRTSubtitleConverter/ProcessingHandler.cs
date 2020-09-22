@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using SRTSubtitleConverter.Converters;
 using SRTSubtitleConverter.Parsers;
 
 namespace SRTSubtitleConverter
@@ -41,7 +42,15 @@ namespace SRTSubtitleConverter
                 {
                     if (Path.GetExtension(inputPath) == ext)
                     {
-                        var result = sf.Value.ToSRT(inputPath);
+                        var parsingStatus = sf.Value.ParseFormat(inputPath, out var parsedData);
+
+                        if (!parsingStatus)
+                        {
+                            continue;
+                        }
+
+                        var srtConverter = new SRTConverter();
+                        var result = srtConverter.Convert(parsedData);
 
                         if (!string.IsNullOrEmpty(result))
                         {
@@ -87,7 +96,15 @@ namespace SRTSubtitleConverter
                             continue;
                         }
 
-                        var result = sf.Value.ToSRT(f.FullName);
+                        var parsingStatus = sf.Value.ParseFormat(inputPath, out var parsedData);
+
+                        if (!parsingStatus)
+                        {
+                            continue;
+                        }
+
+                        var srtConverter = new SRTConverter();
+                        var result = srtConverter.Convert(parsedData);
 
                         if (string.IsNullOrEmpty(result))
                         {

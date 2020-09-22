@@ -21,8 +21,13 @@ namespace SRTSubtitleConverter.Parsers
         public string FileExtension { get; set; } = ".sub";
 
 
-        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
+        public bool ParseFormat(string path, out List<SubtitleItem> result)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var detect = CharsetDetector.DetectFromFile(path);
+            var encoding = Encoding.GetEncoding(detect.Detected.EncodingName);
+
             var subStream = new StreamReader(path, encoding).BaseStream;
             subStream.Position = 0;
             var reader = new StreamReader(subStream, encoding, true);
@@ -105,44 +110,6 @@ namespace SRTSubtitleConverter.Parsers
 
             result = null;
             return false;
-        }
-
-        public string ToSRT(string path)
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            var result = CharsetDetector.DetectFromFile(path);
-            var encoding = Encoding.GetEncoding(result.Detected.EncodingName);
-
-            var resFormat = ParseFormat(path, encoding, out var data);
-
-            if (!resFormat)
-            {
-                return string.Empty;
-            }
-
-            var finalString = "";
-
-            for (var i = 0; i < data.Count; i++)
-            {
-                var number = i;
-                var startTime = Converters.ConvertMilliSecondsToString(data[i].StartTime);
-
-                var endTime = Converters.ConvertMilliSecondsToString(data[i].EndTime);
-
-                var text = data[i].Text;
-
-                var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
-
-                if (i != data.Count - 1)
-                {
-                    format += "\r\n\r\n";
-                }
-
-                finalString += format;
-            }
-
-            return finalString;
         }
 
         private string ConvertString(string str)

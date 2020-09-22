@@ -18,8 +18,13 @@ namespace SRTSubtitleConverter.Parsers
         private const string TextColumn = "Text";
         public string FileExtension { get; set; } = ".ass|.ssa";
 
-        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
+        public bool ParseFormat(string path, out List<SubtitleItem> result)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var detect = CharsetDetector.DetectFromFile(path);
+            var encoding = Encoding.GetEncoding(detect.Detected.EncodingName);
+
             var ssaStream = new StreamReader(path, encoding).BaseStream;
             if (!ssaStream.CanRead || !ssaStream.CanSeek)
             {
@@ -63,7 +68,6 @@ namespace SRTSubtitleConverter.Parsers
                                 var startText = columns[startIndexColumn];
                                 var endText = columns[endIndexColumn];
 
-
                                 var textLine = string.Join(",", columns.Skip(textIndexColumn));
 
                                 var start = ParseSsaTimecode(startText);
@@ -102,44 +106,6 @@ namespace SRTSubtitleConverter.Parsers
 
             result = null;
             return false;
-        }
-
-        public string ToSRT(string path)
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            var result = CharsetDetector.DetectFromFile(path);
-            var encoding = Encoding.GetEncoding(result.Detected.EncodingName);
-
-            var resFormat = ParseFormat(path, encoding, out var data);
-
-            if (!resFormat)
-            {
-                return string.Empty;
-            }
-
-            var finalString = "";
-
-            for (var i = 0; i < data.Count; i++)
-            {
-                var number = i;
-                var startTime = Converters.ConvertMilliSecondsToString(data[i].StartTime);
-
-                var endTime = Converters.ConvertMilliSecondsToString(data[i].EndTime);
-
-                var text = data[i].Text;
-
-                var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
-
-                if (i != data.Count - 1)
-                {
-                    format += "\r\n\r\n";
-                }
-
-                finalString += format;
-            }
-
-            return finalString;
         }
 
         private string ConvertString(string str)
