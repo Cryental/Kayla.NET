@@ -7,9 +7,9 @@ This tool can quickly convert subtitles format from one format to SubRip (SRT) f
 - SAMI (Synchronized Accessible Media Interchange)
 - SubStation Alpha (or ASS)
 - MicroDVD
+- SubViewer 2.0
 - WebVTT (Web Video Text Tracks)
 - Youtube Specific XML Format
-- SubViewer
 - TTML
 - MicroDVD
 
