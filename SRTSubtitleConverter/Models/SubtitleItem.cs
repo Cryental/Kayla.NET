@@ -12,6 +12,13 @@
             Text = text;
         }
 
+        public SubtitleItem(long startTime, long endTime, string text)
+        {
+            StartTime = startTime;
+            EndTime = endTime;
+            Text = text;
+        }
+
         public long StartTime { get; set; }
         public long EndTime { get; set; }
         public string Text { get; set; }
