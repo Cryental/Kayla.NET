@@ -34,7 +34,7 @@ $ ./SRTSubtitleConverter-Linux
 ### macOS:
 Install DotNet Core 3.1 or above, download `SRTSubtitleConverter.zip`, unzip it and run in your terminal:
 ```
-dotnet SRTSubtitleConverter.dll
+$ dotnet SRTSubtitleConverter.dll
 ```
 
 ## How To Use
