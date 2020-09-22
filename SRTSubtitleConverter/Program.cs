@@ -51,6 +51,7 @@ namespace SRTSubtitleConverter
                 if (!File.Exists(input))
                 {
                     Console.WriteLine("[!] The input file does not exist.");
+                    return;
                 }
 
                 if (Directory.Exists(output))
@@ -62,13 +63,7 @@ namespace SRTSubtitleConverter
                     return;
                 }
 
-                if (File.Exists(output))
-                {
-                    processingHandler.ConvertToSRT(input, output);
-                    return;
-                }
-
-                Console.WriteLine("[!] The output file or directory does not exist.");
+                processingHandler.ConvertToSRT(input, output);
             }
         }
     }
