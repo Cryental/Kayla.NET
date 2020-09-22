@@ -10,7 +10,7 @@ namespace SRTSubtitleConverter.Parsers
 {
     public class SSAParser : ISubtitleParser
     {
-        public string FileExtension { get; set; } = ".ass";
+        public string FileExtension { get; set; } = ".ass|.ssa";
 
         private const string EventLine = "[Events]";
         private const char Separator = ',';
@@ -19,7 +19,7 @@ namespace SRTSubtitleConverter.Parsers
         private const string EndColumn = "End";
         private const string TextColumn = "Text";
 
-        public bool ParseFormat(string path, Encoding encoding, out List<Common> result)
+        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
             var ssaStream = new StreamReader(path, encoding).BaseStream;
             if (!ssaStream.CanRead || !ssaStream.CanSeek)
@@ -53,7 +53,7 @@ namespace SRTSubtitleConverter.Parsers
 
                     if (startIndexColumn > 0 && endIndexColumn > 0 && textIndexColumn > 0)
                     {
-                        var items = new List<Common>();
+                        var items = new List<SubtitleItem>();
 
                         line = reader.ReadLine();
                         while (line != null)
@@ -72,7 +72,7 @@ namespace SRTSubtitleConverter.Parsers
 
                                 if (start > 0 && end > 0 && !string.IsNullOrEmpty(textLine))
                                 {
-                                    var item = new Common
+                                    var item = new SubtitleItem
                                     {
                                         StartTime = start,
                                         EndTime = end,
@@ -107,7 +107,7 @@ namespace SRTSubtitleConverter.Parsers
             return false;
         }
 
-        private static string ConvertString(string str)
+        private string ConvertString(string str)
         {
             str = str.Replace("<br>", "\n");
             str = str.Replace("<BR>", "\n");

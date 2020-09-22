@@ -21,7 +21,7 @@ namespace SRTSubtitleConverter.Parsers
             new Regex(@"\d{2}:\d{2}:\d{2}\.\d{2},\d{2}:\d{2}:\d{2}\.\d{2}", RegexOptions.Compiled);
 
 
-        public bool ParseFormat(string path, Encoding encoding, out List<Common> result)
+        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
             var subStream = new StreamReader(path, encoding).BaseStream;
             subStream.Position = 0;
@@ -40,7 +40,7 @@ namespace SRTSubtitleConverter.Parsers
 
                 if (line != null && lineNumber <= MaxLineNumberForItems && IsTimestampLine(line))
                 {
-                    var items = new List<Common>();
+                    var items = new List<SubtitleItem>();
 
                     var timeCodeLine = line;
                     var textLines = new List<string>();
@@ -55,7 +55,7 @@ namespace SRTSubtitleConverter.Parsers
                             var end = timeCodes.Item2;
 
                             if (start > 0 && end > 0 && textLines.Any())
-                                items.Add(new Common
+                                items.Add(new SubtitleItem
                                 {
                                     StartTime = start,
                                     EndTime = end,
@@ -75,7 +75,7 @@ namespace SRTSubtitleConverter.Parsers
                     var lastStart = lastTimeCodes.Item1;
                     var lastEnd = lastTimeCodes.Item2;
                     if (lastStart > 0 && lastEnd > 0 && textLines.Any())
-                        items.Add(new Common
+                        items.Add(new SubtitleItem
                         {
                             StartTime = lastStart,
                             EndTime = lastEnd,
@@ -132,7 +132,7 @@ namespace SRTSubtitleConverter.Parsers
             return finalString;
         }
 
-        private static string ConvertString(string str)
+        private string ConvertString(string str)
         {
             str = str.Replace("[br]", "\r\n");
             str = str.Replace("[BR]", "\r\n");

@@ -10,9 +10,9 @@ namespace SRTSubtitleConverter.Parsers
     public class SAMIParser : ISubtitleParser
     {
         public string FileExtension { get; set; } = ".smi";
-        public bool ParseFormat(string path, Encoding encoding, out List<Common> result)
+        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
-            var li = new List<Common>();
+            var items = new List<SubtitleItem>();
             StreamReader sr = new StreamReader(path, encoding);
 
             var line = sr.ReadLine();
@@ -97,7 +97,7 @@ namespace SRTSubtitleConverter.Parsers
                     }
 
                     
-                    li.Add(new Common(int.Parse(miSync[1]), ConvertString(sb.ToString())));
+                    items.Add(new SubtitleItem(int.Parse(miSync[1]), ConvertString(sb.ToString())));
 
                     sb = new StringBuilder();
 
@@ -107,21 +107,21 @@ namespace SRTSubtitleConverter.Parsers
 
             sr.Close();
 
-            for (var i = 0; i < li.Count; i++)
+            for (var i = 0; i < items.Count; i++)
             {
-                var endTime = i == li.Count - 1
-                    ? li[i].StartTime + 1000
-                    : li[i + 1].StartTime;
+                var endTime = i == items.Count - 1
+                    ? items[i].StartTime + 1000
+                    : items[i + 1].StartTime;
 
-                li[i].EndTime = endTime;
+                items[i].EndTime = endTime;
             }
 
-            result = li;
+            result = items;
             return true;
         }
 
 
-        private static string ConvertString(string str)
+        private string ConvertString(string str)
         {
             str = str.Replace("<br>", "\n");
             str = str.Replace("<BR>", "\n");

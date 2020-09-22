@@ -8,7 +8,7 @@ namespace SRTSubtitleConverter.Parsers
     {
         string FileExtension { get; set; }
 
-        bool ParseFormat(string path, Encoding encoding, out List<Common> result);
+        bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result);
         string ToSRT(string path);
     }
 }

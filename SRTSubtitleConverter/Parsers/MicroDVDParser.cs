@@ -28,7 +28,7 @@ namespace SRTSubtitleConverter.Parsers
 
         public string FileExtension { get; set; } = ".sub";
 
-        public bool ParseFormat(string path, Encoding encoding, out List<Common> result)
+        public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
             var subStream = new StreamReader(path, encoding).BaseStream;
 
@@ -41,7 +41,7 @@ namespace SRTSubtitleConverter.Parsers
             subStream.Position = 0;
             var reader = new StreamReader(subStream, encoding, true);
 
-            var items = new List<Common>();
+            var items = new List<SubtitleItem>();
             var line = reader.ReadLine();
             while (line != null && !IsMicroDvdLine(line)) line = reader.ReadLine();
 
@@ -121,7 +121,7 @@ namespace SRTSubtitleConverter.Parsers
             return finalString;
         }
 
-        private static string ConvertString(string str)
+        private string ConvertString(string str)
         {
             str = str.Replace("<br>", "\n");
             str = str.Replace("<BR>", "\n");
@@ -148,7 +148,7 @@ namespace SRTSubtitleConverter.Parsers
             return Regex.IsMatch(line, LineRegex);
         }
 
-        private Common ParseLine(string line, float frameRate)
+        private SubtitleItem ParseLine(string line, float frameRate)
         {
             var match = Regex.Match(line, LineRegex);
             if (!match.Success || match.Groups.Count <= 2) return null;
@@ -159,7 +159,7 @@ namespace SRTSubtitleConverter.Parsers
             var text = match.Groups[^1].Value;
             var lines = text.Split(_lineSeparators);
             var nonEmptyLines = lines.Where(l => !string.IsNullOrEmpty(l)).ToList();
-            var item = new Common
+            var item = new SubtitleItem
             {
                 StartTime = start,
                 EndTime = end,

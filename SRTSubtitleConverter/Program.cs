@@ -12,7 +12,7 @@ namespace SRTSubtitleConverter
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var path = "";
+            var path = "C:\\Users\\conta\\Videos\\sub.vtt";
 
             var handler = new ProcessingHandler();
             handler.ConvertToSRT(path, "sub.srt");

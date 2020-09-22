@@ -16,32 +16,43 @@ namespace SRTSubtitleConverter
             _supportedFormats.Add("SAMI", new SAMIParser());
             _supportedFormats.Add("SSA", new SSAParser());
             _supportedFormats.Add("SubViewer", new SubViewerParser());
+            _supportedFormats.Add("TTML", new TTMLParser());
+            _supportedFormats.Add("VTT", new VTTParser());
+            _supportedFormats.Add("YoutubeXML", new YTXMLParser());
         }
 
-        public void ConvertToSRT(string inputPath, string outputPath)
+        public bool ConvertToSRT(string inputPath, string outputPath)
         {
             var finalResult = string.Empty;
 
             foreach (var sf in _supportedFormats)
             {
-                if (Path.GetExtension(inputPath) == sf.Value.FileExtension)
-                {
-                    var result = sf.Value.ToSRT(inputPath);
+                var extensions = sf.Value.FileExtension.Split('|');
 
-                    if (!string.IsNullOrEmpty(result))
+                foreach (var ext in extensions)
+                {
+                    if (Path.GetExtension(inputPath) == ext)
                     {
-                        finalResult = result;
-                        break;
+                        var result = sf.Value.ToSRT(inputPath);
+                        
+                        if (!string.IsNullOrEmpty(result))
+                        {
+                            Console.WriteLine(sf.Key);
+                            finalResult = result;
+                            break;
+                        }
                     }
                 }
             }
 
             if (string.IsNullOrEmpty(finalResult))
             {
-                throw new FormatException("This file is an unsupported format.");
+                return false;
             }
 
             File.WriteAllText(outputPath, finalResult, Encoding.UTF8);
+
+            return true;
         }
     }
 }

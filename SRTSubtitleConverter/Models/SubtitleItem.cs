@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace SRTSubtitleConverter.Models
 {
-    public class Common
+    public class SubtitleItem
     {
-        public Common()
+        public SubtitleItem()
         {
         }
 
-        public Common(long startTime, string text)
+        public SubtitleItem(long startTime, string text)
         {
             StartTime = startTime;
             Text = text;
