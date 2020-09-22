@@ -10,7 +10,7 @@ It removes all custom styles and comments from the original file so you will get
 
 ## Features
 
-### Support Subtitles File Format Conversion From:
+### Support Subtitles File Format Conversion
 - SAMI (Synchronized Accessible Media Interchange)
 - SubStation Alpha (or ASS)
 - MicroDVD
@@ -29,10 +29,10 @@ You can convert all supported formats with one command line.
 
 ## Downloads
 
-### Windows:
+### Windows
 Download `SRTSubtitleConverter-Win64.exe` from Releases and run.
 
-### Linux:
+### Linux
 Download `SRTSubtitleConverter-Linux` from Releases and run following commands:
 ```
 $ chmod 777 SRTSubtitleConverter-Linux
@@ -41,7 +41,7 @@ $ ./SRTSubtitleConverter-Linux
 ```
 Tested with Ubuntu 20.04.
 
-### macOS:
+### macOS
 Download `SRTSubtitleConverter-macOS` from Releases and run following commands:
 ```
 $ ./SRTSubtitleConverter-macOS
