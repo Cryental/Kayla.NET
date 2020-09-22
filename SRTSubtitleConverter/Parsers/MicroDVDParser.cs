@@ -17,7 +17,6 @@ namespace SRTSubtitleConverter.Parsers
         private readonly char[] _lineSeparators = {'|'};
         private readonly float defaultFrameRate = 23.976f;
 
-
         public MicroDVDParser()
         {
         }
@@ -26,6 +25,8 @@ namespace SRTSubtitleConverter.Parsers
         {
             this.defaultFrameRate = defaultFrameRate;
         }
+
+        public string FileExtension { get; set; } = ".sub";
 
         public bool ParseFormat(string path, Encoding encoding, out List<Common> result)
         {
@@ -118,7 +119,6 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             return finalString;
-
         }
 
         private static string ConvertString(string str)
@@ -167,7 +167,6 @@ namespace SRTSubtitleConverter.Parsers
             };
 
             return item;
-
         }
 
         private bool TryExtractFrameRate(string text, out float frameRate)

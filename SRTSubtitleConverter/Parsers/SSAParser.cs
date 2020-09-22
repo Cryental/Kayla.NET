@@ -10,6 +10,8 @@ namespace SRTSubtitleConverter.Parsers
 {
     public class SSAParser : ISubtitleParser
     {
+        public string FileExtension { get; set; } = ".ass";
+
         private const string EventLine = "[Events]";
         private const char Separator = ',';
 

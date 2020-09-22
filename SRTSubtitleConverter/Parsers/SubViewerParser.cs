@@ -11,6 +11,8 @@ namespace SRTSubtitleConverter.Parsers
 {
     public class SubViewerParser : ISubtitleParser
     {
+        public string FileExtension { get; set; } = ".sub";
+
         private const string FirstLine = "[INFORMATION]";
         private const short MaxLineNumberForItems = 20;
         private const char TimecodeSeparator = ',';

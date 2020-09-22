@@ -24,13 +24,15 @@ namespace SRTSubtitleConverter
 
             foreach (var sf in _supportedFormats)
             {
-                Console.WriteLine(sf.Key);
-                var result = sf.Value.ToSRT(inputPath);
-
-                if (!string.IsNullOrEmpty(result))
+                if (Path.GetExtension(inputPath) == sf.Value.FileExtension)
                 {
-                    finalResult = result;
-                    break;
+                    var result = sf.Value.ToSRT(inputPath);
+
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        finalResult = result;
+                        break;
+                    }
                 }
             }
 

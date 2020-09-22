@@ -9,6 +9,7 @@ namespace SRTSubtitleConverter.Parsers
 {
     public class SAMIParser : ISubtitleParser
     {
+        public string FileExtension { get; set; } = ".smi";
         public bool ParseFormat(string path, Encoding encoding, out List<Common> result)
         {
             var li = new List<Common>();

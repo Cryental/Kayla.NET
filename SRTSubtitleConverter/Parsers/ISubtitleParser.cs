@@ -6,6 +6,8 @@ namespace SRTSubtitleConverter.Parsers
 {
     public interface ISubtitleParser
     {
+        string FileExtension { get; set; }
+
         bool ParseFormat(string path, Encoding encoding, out List<Common> result);
         string ToSRT(string path);
     }
