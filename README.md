@@ -1,5 +1,5 @@
 # SRTSubtitleConverter
-This tool can quickly convert subtitles format from one format to SubRip (SRT) format.
+This tool can quickly convert subtitles to SubRip (SRT) format.
 
 It removes all custom styles and comments from the original file so you will get a clean subtitle.
 
