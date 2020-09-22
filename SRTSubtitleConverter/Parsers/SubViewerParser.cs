@@ -11,14 +11,14 @@ namespace SRTSubtitleConverter.Parsers
 {
     public class SubViewerParser : ISubtitleParser
     {
-        public string FileExtension { get; set; } = ".sub";
-
         private const string FirstLine = "[INFORMATION]";
         private const short MaxLineNumberForItems = 20;
         private const char TimecodeSeparator = ',';
 
         private readonly Regex _timestampRegex =
             new Regex(@"\d{2}:\d{2}:\d{2}\.\d{2},\d{2}:\d{2}:\d{2}\.\d{2}", RegexOptions.Compiled);
+
+        public string FileExtension { get; set; } = ".sub";
 
 
         public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)

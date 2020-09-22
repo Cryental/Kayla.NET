@@ -10,10 +10,11 @@ namespace SRTSubtitleConverter.Parsers
     public class SAMIParser : ISubtitleParser
     {
         public string FileExtension { get; set; } = ".smi";
+
         public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
             var items = new List<SubtitleItem>();
-            StreamReader sr = new StreamReader(path, encoding);
+            var sr = new StreamReader(path, encoding);
 
             var line = sr.ReadLine();
             if (line == null || !line.Equals("<SAMI>"))
@@ -33,7 +34,7 @@ namespace SRTSubtitleConverter.Parsers
                 result = null;
                 return false;
             }
-            
+
             var check = false;
             var miClassString = new string[2];
             var sb = new StringBuilder();
@@ -44,7 +45,7 @@ namespace SRTSubtitleConverter.Parsers
                 if (check == false)
                 {
                     line = sr.ReadLine();
-                    
+
                     while (true)
                         if (string.IsNullOrEmpty(line))
                             line = sr.ReadLine();
@@ -56,32 +57,19 @@ namespace SRTSubtitleConverter.Parsers
                     check = false;
                 }
 
-                if (line.Contains("<--") && line.Contains("-->"))
-                {
-                    continue;
-                }
+                if (line.Contains("<--") && line.Contains("-->")) continue;
 
-                if (line.Contains("<!--"))
-                {
-                    sbComment = true;
-                }
+                if (line.Contains("<!--")) sbComment = true;
 
-                if (line.Contains("-->"))
-                {
-                    sbComment = false;
-                }
+                if (line.Contains("-->")) sbComment = false;
 
-                if (sbComment)
-                {
-                    continue;
-                }
+                if (sbComment) continue;
 
                 if (line.Contains("</BODY>")) break;
                 if (line.Contains("</SAMI>")) break;
 
                 if (line[0].Equals('<'))
                 {
-                    
                     var length = line.IndexOf('>');
                     miClassString[0] = line.Substring(1, length - 1);
                     miClassString[1] = line.Substring(length + 2);
@@ -91,12 +79,10 @@ namespace SRTSubtitleConverter.Parsers
 
                     sb.Append(line);
 
-                    while ((line = sr.ReadLine())?.ToUpper().Contains("<SYNC", StringComparison.OrdinalIgnoreCase) == false)
-                    {
-                        sb.Append(line);
-                    }
+                    while ((line = sr.ReadLine())?.ToUpper().Contains("<SYNC", StringComparison.OrdinalIgnoreCase) ==
+                           false) sb.Append(line);
 
-                    
+
                     items.Add(new SubtitleItem(int.Parse(miSync[1]), ConvertString(sb.ToString())));
 
                     sb = new StringBuilder();
@@ -118,29 +104,6 @@ namespace SRTSubtitleConverter.Parsers
 
             result = items;
             return true;
-        }
-
-
-        private string ConvertString(string str)
-        {
-            str = str.Replace("<br>", "\n");
-            str = str.Replace("<BR>", "\n");
-            str = str.Replace("&nbsp;", "");
-            try
-            {
-                while (str.IndexOf("<", StringComparison.Ordinal) != -1)
-                {
-                    var i = str.IndexOf("<", StringComparison.Ordinal);
-                    var j = str.IndexOf(">", StringComparison.Ordinal);
-                    str = str.Remove(i, j - i + 1);
-                }
-
-                return str;
-            }
-            catch
-            {
-                return str;
-            }
         }
 
         public string ToSRT(string path)
@@ -173,8 +136,29 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             return finalString;
-
         }
-        
+
+
+        private string ConvertString(string str)
+        {
+            str = str.Replace("<br>", "\n");
+            str = str.Replace("<BR>", "\n");
+            str = str.Replace("&nbsp;", "");
+            try
+            {
+                while (str.IndexOf("<", StringComparison.Ordinal) != -1)
+                {
+                    var i = str.IndexOf("<", StringComparison.Ordinal);
+                    var j = str.IndexOf(">", StringComparison.Ordinal);
+                    str = str.Remove(i, j - i + 1);
+                }
+
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
+        }
     }
 }

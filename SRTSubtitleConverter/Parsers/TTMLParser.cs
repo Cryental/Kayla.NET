@@ -24,7 +24,6 @@ namespace SRTSubtitleConverter.Parsers
 
             var nodeList = xElement.Descendants(tt + "p").ToList();
             foreach (var node in nodeList)
-            {
                 try
                 {
                     var reader = node.CreateReader();
@@ -39,10 +38,10 @@ namespace SRTSubtitleConverter.Parsers
                         .Replace(string.Format(@" xmlns:tt=""{0}""", tt), "")
                         .Replace(string.Format(@" xmlns=""{0}""", tt), "");
 
-                    items.Add(new SubtitleItem()
+                    items.Add(new SubtitleItem
                     {
-                        StartTime = (int)(startTicks),
-                        EndTime = (int)(endTicks),
+                        StartTime = (int) startTicks,
+                        EndTime = (int) endTicks,
                         Text = ConvertString(text)
                     });
                 }
@@ -51,7 +50,6 @@ namespace SRTSubtitleConverter.Parsers
                     result = null;
                     return false;
                 }
-            }
 
             if (items.Any())
             {
@@ -93,21 +91,14 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             return finalString;
-
         }
 
         private static long ParseTimecode(string s)
         {
             TimeSpan result;
-            if (TimeSpan.TryParse(s, out result))
-            {
-                return (long)result.TotalMilliseconds;
-            }
+            if (TimeSpan.TryParse(s, out result)) return (long) result.TotalMilliseconds;
             long ticks;
-            if (long.TryParse(s.TrimEnd('t'), out ticks))
-            {
-                return ticks / 10000;
-            }
+            if (long.TryParse(s.TrimEnd('t'), out ticks)) return ticks / 10000;
             return -1;
         }
 

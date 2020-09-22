@@ -56,13 +56,12 @@ namespace SRTSubtitleConverter.Parsers
                         else
                         {
                             item.Text = ConvertString(line);
-
                         }
 
                         item.Text = string.IsNullOrEmpty(item.Text) ? "" : item.Text;
                     }
 
-                    if ((item.StartTime != 0 || item.EndTime != 0) && item.Text.Any()) 
+                    if ((item.StartTime != 0 || item.EndTime != 0) && item.Text.Any())
                         items.Add(item);
                 }
 
@@ -72,28 +71,6 @@ namespace SRTSubtitleConverter.Parsers
 
             result = null;
             return false;
-        }
-
-        private string ConvertString(string str)
-        {
-            str = str.Replace("<br>", "\n");
-            str = str.Replace("<BR>", "\n");
-            str = str.Replace("&nbsp;", "");
-            try
-            {
-                while (str.IndexOf("<", StringComparison.Ordinal) != -1)
-                {
-                    var i = str.IndexOf("<", StringComparison.Ordinal);
-                    var j = str.IndexOf(">", StringComparison.Ordinal);
-                    str = str.Remove(i, j - i + 1);
-                }
-
-                return str;
-            }
-            catch
-            {
-                return str;
-            }
         }
 
         public string ToSRT(string path)
@@ -126,6 +103,28 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             return finalString;
+        }
+
+        private string ConvertString(string str)
+        {
+            str = str.Replace("<br>", "\n");
+            str = str.Replace("<BR>", "\n");
+            str = str.Replace("&nbsp;", "");
+            try
+            {
+                while (str.IndexOf("<", StringComparison.Ordinal) != -1)
+                {
+                    var i = str.IndexOf("<", StringComparison.Ordinal);
+                    var j = str.IndexOf(">", StringComparison.Ordinal);
+                    str = str.Remove(i, j - i + 1);
+                }
+
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
         }
 
         private IEnumerable<string> GetVttSubTitleParts(TextReader reader)

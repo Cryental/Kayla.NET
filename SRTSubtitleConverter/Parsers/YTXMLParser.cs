@@ -13,6 +13,7 @@ namespace SRTSubtitleConverter.Parsers
     public class YTXMLParser : ISubtitleParser
     {
         public string FileExtension { get; set; } = ".xml";
+
         public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
             var xmlStream = new StreamReader(path, encoding).BaseStream;
@@ -29,22 +30,21 @@ namespace SRTSubtitleConverter.Parsers
                 var nodeList = xmlDoc.DocumentElement.SelectNodes("//text");
 
                 if (nodeList != null)
-                {
                     for (var i = 0; i < nodeList.Count; i++)
                     {
                         var node = nodeList[i];
                         try
                         {
                             var startString = node.Attributes["start"].Value;
-                            float start = float.Parse(startString, CultureInfo.InvariantCulture);
+                            var start = float.Parse(startString, CultureInfo.InvariantCulture);
                             var durString = node.Attributes["dur"].Value;
-                            float duration = float.Parse(durString, CultureInfo.InvariantCulture);
+                            var duration = float.Parse(durString, CultureInfo.InvariantCulture);
                             var text = node.InnerText;
 
-                            items.Add(new SubtitleItem()
+                            items.Add(new SubtitleItem
                             {
-                                StartTime = (int)(start * 1000),
-                                EndTime = (int)((start + duration) * 1000),
+                                StartTime = (int) (start * 1000),
+                                EndTime = (int) ((start + duration) * 1000),
                                 Text = ConvertString(text)
                             });
                         }
@@ -54,7 +54,6 @@ namespace SRTSubtitleConverter.Parsers
                             return false;
                         }
                     }
-                }
             }
 
             if (items.Any())
@@ -62,11 +61,9 @@ namespace SRTSubtitleConverter.Parsers
                 result = items;
                 return true;
             }
-            else
-            {
-                result = null;
-                return false;
-            }
+
+            result = null;
+            return false;
         }
 
         public string ToSRT(string path)

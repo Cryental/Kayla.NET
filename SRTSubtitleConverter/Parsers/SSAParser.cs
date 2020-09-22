@@ -10,14 +10,13 @@ namespace SRTSubtitleConverter.Parsers
 {
     public class SSAParser : ISubtitleParser
     {
-        public string FileExtension { get; set; } = ".ass|.ssa";
-
         private const string EventLine = "[Events]";
         private const char Separator = ',';
 
         private const string StartColumn = "Start";
         private const string EndColumn = "End";
         private const string TextColumn = "Text";
+        public string FileExtension { get; set; } = ".ass|.ssa";
 
         public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
@@ -107,28 +106,6 @@ namespace SRTSubtitleConverter.Parsers
             return false;
         }
 
-        private string ConvertString(string str)
-        {
-            str = str.Replace("<br>", "\n");
-            str = str.Replace("<BR>", "\n");
-            str = str.Replace("\\N", "\n");
-            try
-            {
-                while (str.IndexOf("{", StringComparison.Ordinal) != -1)
-                {
-                    var i = str.IndexOf("{", StringComparison.Ordinal);
-                    var j = str.IndexOf("}", StringComparison.Ordinal);
-                    str = str.Remove(i, j - i + 1);
-                }
-
-                return str;
-            }
-            catch
-            {
-                return str;
-            }
-        }
-
         public string ToSRT(string path)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -159,7 +136,28 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             return finalString;
+        }
 
+        private string ConvertString(string str)
+        {
+            str = str.Replace("<br>", "\n");
+            str = str.Replace("<BR>", "\n");
+            str = str.Replace("\\N", "\n");
+            try
+            {
+                while (str.IndexOf("{", StringComparison.Ordinal) != -1)
+                {
+                    var i = str.IndexOf("{", StringComparison.Ordinal);
+                    var j = str.IndexOf("}", StringComparison.Ordinal);
+                    str = str.Remove(i, j - i + 1);
+                }
+
+                return str;
+            }
+            catch
+            {
+                return str;
+            }
         }
 
         private int ParseSsaTimecode(string s)

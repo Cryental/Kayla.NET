@@ -1,14 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<Nullable>disable</Nullable>
+		<VersionPrefix>1.1.7</VersionPrefix>
+		<Authors>Cryental</Authors>
+		<Company>Volistx Team</Company>
+		<Product>SRTSubtitleConverter</Product>
+		<Copyright>Developed By @Cryental, GPLv3.0</Copyright>
+		<Description>This tool can quickly convert subtitles format from one format to SubRip (SRT) format.</Description>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-    <PackageReference Include="UTF.Unknown" Version="2.3.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser" Version="2.8.0" />
+		<PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
+		<PackageReference Include="UTF.Unknown" Version="2.3.0" />
+	</ItemGroup>
 
 </Project>
