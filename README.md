@@ -1,5 +1,5 @@
-<p align="center">
-   <h1>SRTSubtitleConverter</h1>
+# SRTSubtitleConverter
+<p>
     <a href="https://github.com/Cryental/SRTSubtitleConverter/blob/master/LICENSE" alt="Contributors">
         <img src="https://img.shields.io/github/license/Cryental/SRTSubtitleConverter" /></a>
 </p>
