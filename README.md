@@ -15,7 +15,9 @@ It removes all custom styles and comments from the original file so you will get
 - TTML
 
 ### Bundled Automatic Encoding Converter 
-You don't worry about encoding problem. This software will detect your subtitle encoding type and convert into UTF-8.
+You don't need to worry about encoding problem anymore. 
+
+This software will detect your subtitle encoding type and convert into UTF-8 automatically.
 
 ### Batch Conversion
 You can convert all supported formats with one command line.
