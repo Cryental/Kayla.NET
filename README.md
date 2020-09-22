@@ -18,17 +18,30 @@ You don't worry about encoding problem. This software will detect your subtitle 
 ### Batch Conversion
 You can convert all supported formats with one command line.
 
-## Usages
+## Downloads
+
+### Windows:
+Download `SRTSubtitleConverter-Win64.exe`.
+
+### Linux:
+Download `SRTSubtitleConverter-Linux` from Releases and run following commands:
+```
+$ chmod 777 SRTSubtitleConverter-Linux
+$ chmod +x SRTSubtitleConverter-Linux
+$ ./SRTSubtitleConverter-Linux
+```
+
+### macOS:
+Install DotNet Core 3.1 or above, download `SRTSubtitleConverter.zip`, unzip it and run in your terminal:
+```
+dotnet SRTSubtitleConverter.dll
+```
+
+## How To Use
 ```
 -i, --input      Required. Set the files or folders to be converted.
 -o, --output     Required. Set the path to save the converted files.
 -b, --batch      Set if you want to convert all supported files in a folder.
-```
-### Example:
-```
-Single File Without File Name: SRTSubtitleConverter --input "/path/to/folder/file.smi" --output "/path/output/to/folder/"
-Single File With File Name: SRTSubtitleConverter --input "/path/to/folder/file.smi" --output "/path/output/to/folder/file.srt"
-Batch File Conversation: SRTSubtitleConverter --input "/path/to/folder/" --output "/path/output/to/folder/" --batch
 ```
 
 ## Requirements
