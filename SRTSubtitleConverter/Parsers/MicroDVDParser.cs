@@ -57,11 +57,6 @@ namespace SRTSubtitleConverter.Parsers
 
                         items.Add(firstItem);
                     }
-
-                    if (success)
-                    {
-                        Console.WriteLine(frameRate);
-                    }
                 }
                 else
                 {
