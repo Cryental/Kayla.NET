@@ -1,6 +1,6 @@
 # SRTSubtitleConverter
 <p>
-    <a href="https://github.com/Cryental/SRTSubtitleConverter/blob/master/LICENSE" alt="Contributors">
+    <a href="https://github.com/Cryental/SRTSubtitleConverter/blob/master/LICENSE" alt="License">
         <img src="https://img.shields.io/github/license/Cryental/SRTSubtitleConverter" /></a>
 </p>
 
