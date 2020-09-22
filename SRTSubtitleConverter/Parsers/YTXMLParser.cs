@@ -10,7 +10,7 @@ using UtfUnknown;
 
 namespace SRTSubtitleConverter.Parsers
 {
-    public class YTXMLParser : ISubtitleParser
+    public class YtXmlParser : ISubtitleParser
     {
         public string FileExtension { get; set; } = ".xml";
 

@@ -19,7 +19,7 @@ namespace SRTSubtitleConverter
             _supportedFormats.Add("SubViewer 2.0", new SubViewerParser());
             _supportedFormats.Add("Timed Text", new TTMLParser());
             _supportedFormats.Add("WebVTT", new VTTParser());
-            _supportedFormats.Add("Youtube Subtitle XML", new YTXMLParser());
+            _supportedFormats.Add("Youtube Subtitle XML", new YtXmlParser());
         }
 
         public bool ConvertToSRT(string inputPath, string outputPath, bool folderFlag = false)

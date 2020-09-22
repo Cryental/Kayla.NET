@@ -11,6 +11,10 @@
 		<Copyright>Developed By @Cryental, GPLv3.0</Copyright>
 		<Description>This tool can quickly convert subtitles format from one format to SubRip (SRT) format.</Description>
 		<RuntimeIdentifiers>win-x64;osx.10.15-x64;ubuntu.20.04-x64</RuntimeIdentifiers>
+		<PublishTrimmed>true</PublishTrimmed>
+		<PublishReadyToRun>true</PublishReadyToRun>
+		<PublishSingleFile>true</PublishSingleFile>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	</PropertyGroup>
 
 	<ItemGroup>
