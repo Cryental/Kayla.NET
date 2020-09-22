@@ -56,7 +56,7 @@ Tested with macOS 10.15.
 ```
 
 ## Requirements
-This software will work with Windows, Linux and macOS.
+This software will work with Windows, Linux and macOS without any additional software.
 
 ## Disclaimer
 This software is licensed by GPL-3.0 License.
