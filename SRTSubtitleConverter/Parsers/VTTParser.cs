@@ -62,7 +62,9 @@ namespace SRTSubtitleConverter.Parsers
                     }
 
                     if ((item.StartTime != 0 || item.EndTime != 0) && item.Text.Any())
+                    {
                         items.Add(item);
+                    }
                 }
 
                 result = items;
@@ -82,7 +84,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var resFormat = ParseFormat(path, encoding, out var data);
 
-            if (!resFormat) return string.Empty;
+            if (!resFormat)
+            {
+                return string.Empty;
+            }
 
             var finalString = "";
 
@@ -97,7 +102,10 @@ namespace SRTSubtitleConverter.Parsers
 
                 var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
 
-                if (i != data.Count - 1) format += "\r\n\r\n";
+                if (i != data.Count - 1)
+                {
+                    format += "\r\n\r\n";
+                }
 
                 finalString += format;
             }
@@ -133,18 +141,27 @@ namespace SRTSubtitleConverter.Parsers
             var sb = new StringBuilder();
 
             while ((line = reader.ReadLine()) != null)
+            {
                 if (string.IsNullOrEmpty(line.Trim()))
                 {
                     var res = sb.ToString().TrimEnd();
-                    if (!string.IsNullOrEmpty(res)) yield return res;
+                    if (!string.IsNullOrEmpty(res))
+                    {
+                        yield return res;
+                    }
+
                     sb = new StringBuilder();
                 }
                 else
                 {
                     sb.AppendLine(line);
                 }
+            }
 
-            if (sb.Length > 0) yield return sb.ToString();
+            if (sb.Length > 0)
+            {
+                yield return sb.ToString();
+            }
         }
 
         private bool TryParseTimecodeLine(string line, out int startTc, out int endTc)
@@ -173,7 +190,10 @@ namespace SRTSubtitleConverter.Parsers
             else
             {
                 match = Regex.Match(s, "[0-9]+:[0-9]+[,\\.][0-9]+");
-                if (match.Success) timeString = "00:" + match.Value;
+                if (match.Success)
+                {
+                    timeString = "00:" + match.Value;
+                }
             }
 
             if (!string.IsNullOrEmpty(timeString))

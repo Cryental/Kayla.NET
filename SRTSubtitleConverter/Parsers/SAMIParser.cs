@@ -25,8 +25,12 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             while ((line = sr.ReadLine()) != null)
+            {
                 if (line.Equals("<BODY>"))
+                {
                     break;
+                }
+            }
 
             if (string.IsNullOrEmpty(line))
             {
@@ -47,26 +51,51 @@ namespace SRTSubtitleConverter.Parsers
                     line = sr.ReadLine();
 
                     while (true)
+                    {
                         if (string.IsNullOrEmpty(line))
+                        {
                             line = sr.ReadLine();
+                        }
                         else
+                        {
                             break;
+                        }
+                    }
                 }
                 else
                 {
                     check = false;
                 }
 
-                if (line.Contains("<--") && line.Contains("-->")) continue;
+                if (line.Contains("<--") && line.Contains("-->"))
+                {
+                    continue;
+                }
 
-                if (line.Contains("<!--")) sbComment = true;
+                if (line.Contains("<!--"))
+                {
+                    sbComment = true;
+                }
 
-                if (line.Contains("-->")) sbComment = false;
+                if (line.Contains("-->"))
+                {
+                    sbComment = false;
+                }
 
-                if (sbComment) continue;
+                if (sbComment)
+                {
+                    continue;
+                }
 
-                if (line.Contains("</BODY>")) break;
-                if (line.Contains("</SAMI>")) break;
+                if (line.Contains("</BODY>"))
+                {
+                    break;
+                }
+
+                if (line.Contains("</SAMI>"))
+                {
+                    break;
+                }
 
                 if (line[0].Equals('<'))
                 {
@@ -80,7 +109,10 @@ namespace SRTSubtitleConverter.Parsers
                     sb.Append(line);
 
                     while ((line = sr.ReadLine())?.ToUpper().Contains("<SYNC", StringComparison.OrdinalIgnoreCase) ==
-                           false) sb.Append(line);
+                           false)
+                    {
+                        sb.Append(line);
+                    }
 
 
                     items.Add(new SubtitleItem(int.Parse(miSync[1]), ConvertString(sb.ToString())));
@@ -115,7 +147,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var resFormat = ParseFormat(path, encoding, out var data);
 
-            if (!resFormat) return string.Empty;
+            if (!resFormat)
+            {
+                return string.Empty;
+            }
 
             var finalString = "";
 
@@ -130,7 +165,10 @@ namespace SRTSubtitleConverter.Parsers
 
                 var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
 
-                if (i != data.Count - 1) format += "\r\n\r\n";
+                if (i != data.Count - 1)
+                {
+                    format += "\r\n\r\n";
+                }
 
                 finalString += format;
             }

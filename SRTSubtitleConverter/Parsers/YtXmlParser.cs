@@ -1,53 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
+using System.Xml;
 using SRTSubtitleConverter.Models;
 using UtfUnknown;
 
 namespace SRTSubtitleConverter.Parsers
 {
-    public class TTMLParser : ISubtitleParser
+    public class YtXmlParser : ISubtitleParser
     {
-        public string FileExtension { get; set; } = ".xml|.ttml";
+        public string FileExtension { get; set; } = ".xml";
 
         public bool ParseFormat(string path, Encoding encoding, out List<SubtitleItem> result)
         {
             var xmlStream = new StreamReader(path, encoding).BaseStream;
+            // rewind the stream
             xmlStream.Position = 0;
             var items = new List<SubtitleItem>();
 
-            var xElement = XElement.Load(xmlStream);
-            var tt = xElement.GetNamespaceOfPrefix("tt") ?? xElement.GetDefaultNamespace();
+            // parse xml stream
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(xmlStream);
 
-            var nodeList = xElement.Descendants(tt + "p").ToList();
-            foreach (var node in nodeList)
+            if (xmlDoc.DocumentElement != null)
             {
-                try
-                {
-                    var reader = node.CreateReader();
-                    reader.MoveToContent();
-                    var beginString = node.Attribute("begin").Value.Replace("t", "");
-                    var startTicks = ParseTimecode(beginString);
-                    var endString = node.Attribute("end").Value.Replace("t", "");
-                    var endTicks = ParseTimecode(endString);
-                    var text = reader.ReadInnerXml()
-                        .Replace("<tt:", "<")
-                        .Replace("</tt:", "</")
-                        .Replace(string.Format(@" xmlns:tt=""{0}""", tt), "")
-                        .Replace(string.Format(@" xmlns=""{0}""", tt), "");
+                var nodeList = xmlDoc.DocumentElement.SelectNodes("//text");
 
-                    items.Add(new SubtitleItem
-                    {
-                        StartTime = (int) startTicks, EndTime = (int) endTicks, Text = ConvertString(text)
-                    });
-                }
-                catch
+                if (nodeList != null)
                 {
-                    result = null;
-                    return false;
+                    for (var i = 0; i < nodeList.Count; i++)
+                    {
+                        var node = nodeList[i];
+                        try
+                        {
+                            var startString = node.Attributes["start"].Value;
+                            var start = float.Parse(startString, CultureInfo.InvariantCulture);
+                            var durString = node.Attributes["dur"].Value;
+                            var duration = float.Parse(durString, CultureInfo.InvariantCulture);
+                            var text = node.InnerText;
+
+                            items.Add(new SubtitleItem
+                            {
+                                StartTime = (int) (start * 1000),
+                                EndTime = (int) ((start + duration) * 1000),
+                                Text = ConvertString(text)
+                            });
+                        }
+                        catch
+                        {
+                            result = null;
+                            return false;
+                        }
+                    }
                 }
             }
 
@@ -97,23 +104,6 @@ namespace SRTSubtitleConverter.Parsers
             }
 
             return finalString;
-        }
-
-        private static long ParseTimecode(string s)
-        {
-            TimeSpan result;
-            if (TimeSpan.TryParse(s, out result))
-            {
-                return (long) result.TotalMilliseconds;
-            }
-
-            long ticks;
-            if (long.TryParse(s.TrimEnd('t'), out ticks))
-            {
-                return ticks / 10000;
-            }
-
-            return -1;
         }
 
         private string ConvertString(string str)

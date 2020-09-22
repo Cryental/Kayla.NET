@@ -43,7 +43,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var items = new List<SubtitleItem>();
             var line = reader.ReadLine();
-            while (line != null && !IsMicroDvdLine(line)) line = reader.ReadLine();
+            while (line != null && !IsMicroDvdLine(line))
+            {
+                line = reader.ReadLine();
+            }
 
             if (line != null)
             {
@@ -59,7 +62,10 @@ namespace SRTSubtitleConverter.Parsers
                         items.Add(firstItem);
                     }
 
-                    if (success) Console.WriteLine(frameRate);
+                    if (success)
+                    {
+                        Console.WriteLine(frameRate);
+                    }
                 }
                 else
                 {
@@ -98,7 +104,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var resFormat = ParseFormat(path, encoding, out var data);
 
-            if (!resFormat) return string.Empty;
+            if (!resFormat)
+            {
+                return string.Empty;
+            }
 
             var finalString = "";
 
@@ -113,7 +122,10 @@ namespace SRTSubtitleConverter.Parsers
 
                 var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
 
-                if (i != data.Count - 1) format += "\r\n\r\n";
+                if (i != data.Count - 1)
+                {
+                    format += "\r\n\r\n";
+                }
 
                 finalString += format;
             }
@@ -151,7 +163,11 @@ namespace SRTSubtitleConverter.Parsers
         private SubtitleItem ParseLine(string line, float frameRate)
         {
             var match = Regex.Match(line, LineRegex);
-            if (!match.Success || match.Groups.Count <= 2) return null;
+            if (!match.Success || match.Groups.Count <= 2)
+            {
+                return null;
+            }
+
             var startFrame = match.Groups[1].Value;
             var start = (int) (1000 * double.Parse(startFrame) / frameRate);
             var endTime = match.Groups[2].Value;
@@ -161,9 +177,7 @@ namespace SRTSubtitleConverter.Parsers
             var nonEmptyLines = lines.Where(l => !string.IsNullOrEmpty(l)).ToList();
             var item = new SubtitleItem
             {
-                StartTime = start,
-                EndTime = end,
-                Text = ConvertString(string.Join("\r\n", nonEmptyLines.ToArray()))
+                StartTime = start, EndTime = end, Text = ConvertString(string.Join("\r\n", nonEmptyLines.ToArray()))
             };
 
             return item;

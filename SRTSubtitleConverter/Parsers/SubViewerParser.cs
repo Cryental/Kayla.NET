@@ -55,19 +55,24 @@ namespace SRTSubtitleConverter.Parsers
                             var end = timeCodes.Item2;
 
                             if (start > 0 && end > 0 && textLines.Any())
+                            {
                                 items.Add(new SubtitleItem
                                 {
                                     StartTime = start,
                                     EndTime = end,
                                     Text = ConvertString(string.Join("\r\n", textLines.ToArray()))
                                 });
+                            }
 
                             timeCodeLine = line;
                             textLines = new List<string>();
                         }
-                        else if (!string.IsNullOrEmpty(line))
+                        else
                         {
-                            textLines.Add(line);
+                            if (!string.IsNullOrEmpty(line))
+                            {
+                                textLines.Add(line);
+                            }
                         }
                     }
 
@@ -75,12 +80,14 @@ namespace SRTSubtitleConverter.Parsers
                     var lastStart = lastTimeCodes.Item1;
                     var lastEnd = lastTimeCodes.Item2;
                     if (lastStart > 0 && lastEnd > 0 && textLines.Any())
+                    {
                         items.Add(new SubtitleItem
                         {
                             StartTime = lastStart,
                             EndTime = lastEnd,
                             Text = ConvertString(string.Join("\r\n", textLines.ToArray()))
                         });
+                    }
 
                     if (items.Any())
                     {
@@ -109,7 +116,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var resFormat = ParseFormat(path, encoding, out var data);
 
-            if (!resFormat) return string.Empty;
+            if (!resFormat)
+            {
+                return string.Empty;
+            }
 
             var finalString = "";
 
@@ -124,7 +134,10 @@ namespace SRTSubtitleConverter.Parsers
 
                 var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
 
-                if (i != data.Count - 1) format += "\r\n\r\n";
+                if (i != data.Count - 1)
+                {
+                    format += "\r\n\r\n";
+                }
 
                 finalString += format;
             }
@@ -183,7 +196,11 @@ namespace SRTSubtitleConverter.Parsers
 
         private bool IsTimestampLine(string line)
         {
-            if (string.IsNullOrEmpty(line)) return false;
+            if (string.IsNullOrEmpty(line))
+            {
+                return false;
+            }
+
             var isMatch = _timestampRegex.IsMatch(line);
             return isMatch;
         }

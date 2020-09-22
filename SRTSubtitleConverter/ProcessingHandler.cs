@@ -25,32 +25,37 @@ namespace SRTSubtitleConverter
         public bool ConvertToSRT(string inputPath, string outputPath, bool folderFlag = false)
         {
             var finalResult = string.Empty;
-            var finalType = string.Empty;
 
             var outputFilePath = outputPath;
 
             if (folderFlag)
-                outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(inputPath) + ".srt");
+            {
+                outputFilePath = Path.Combine(outputPath, $"{Path.GetFileNameWithoutExtension(inputPath)}.srt");
+            }
 
             foreach (var sf in _supportedFormats)
             {
                 var extensions = sf.Value.FileExtension.Split('|');
 
                 foreach (var ext in extensions)
+                {
                     if (Path.GetExtension(inputPath) == ext)
                     {
                         var result = sf.Value.ToSRT(inputPath);
 
                         if (!string.IsNullOrEmpty(result))
                         {
-                            finalType = sf.Key;
                             finalResult = result;
                             break;
                         }
                     }
+                }
             }
 
-            if (string.IsNullOrEmpty(finalResult)) return false;
+            if (string.IsNullOrEmpty(finalResult))
+            {
+                return false;
+            }
 
             File.WriteAllText(outputFilePath, finalResult, Encoding.UTF8);
             Console.WriteLine($"[-] {Path.GetFileName(inputPath)}");
@@ -67,26 +72,30 @@ namespace SRTSubtitleConverter
 
             foreach (var f in files.GetFiles())
             {
-                var outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(f.FullName) + ".srt");
+                var outputFilePath = Path.Combine(outputPath, $"{Path.GetFileNameWithoutExtension(inputPath)}.srt");
                 var finalResult = string.Empty;
-                var finalType = string.Empty;
 
                 foreach (var sf in _supportedFormats)
                 {
                     var extensions = sf.Value.FileExtension.Split('|');
 
                     foreach (var ext in extensions)
-                        if (Path.GetExtension(f.Name) == ext)
+                    {
+                        if (Path.GetExtension(f.Name) != ext)
                         {
-                            var result = sf.Value.ToSRT(f.FullName);
-
-                            if (!string.IsNullOrEmpty(result))
-                            {
-                                finalType = sf.Key;
-                                finalResult = result;
-                                break;
-                            }
+                            continue;
                         }
+
+                        var result = sf.Value.ToSRT(f.FullName);
+
+                        if (string.IsNullOrEmpty(result))
+                        {
+                            continue;
+                        }
+
+                        finalResult = result;
+                        break;
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(finalResult))
@@ -102,14 +111,20 @@ namespace SRTSubtitleConverter
 
             Console.WriteLine("[+] Converted Files ---");
             Console.WriteLine();
-            foreach (var f in convertedFiles) Console.WriteLine($"[-] {f}");
+            foreach (var f in convertedFiles)
+            {
+                Console.WriteLine($"[-] {f}");
+            }
 
             Console.WriteLine();
             Console.WriteLine();
 
             Console.WriteLine("[+] Not Converted Files ---");
             Console.WriteLine();
-            foreach (var f in unconvertedFiles) Console.WriteLine($"[-] {f}");
+            foreach (var f in unconvertedFiles)
+            {
+                Console.WriteLine($"[-] {f}");
+            }
 
             Console.WriteLine();
 

@@ -23,7 +23,10 @@ namespace SRTSubtitleConverter
                 folderFlag = o.FolderFlag;
             });
 
-            if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(output)) return;
+            if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(output))
+            {
+                return;
+            }
 
             if (folderFlag)
             {
@@ -70,13 +73,19 @@ namespace SRTSubtitleConverter
                 {
                     var result = processingHandler.ConvertToSRT(input, output, true);
 
-                    if (!result) Console.WriteLine("[!] This file is an unsupported format.");
+                    if (!result)
+                    {
+                        Console.WriteLine("[!] This file is an unsupported format.");
+                    }
                 }
                 else
                 {
                     var result = processingHandler.ConvertToSRT(input, output);
 
-                    if (!result) Console.WriteLine("[!] This file is an unsupported format.");
+                    if (!result)
+                    {
+                        Console.WriteLine("[!] This file is an unsupported format.");
+                    }
                 }
             }
         }

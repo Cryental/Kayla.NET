@@ -73,9 +73,7 @@ namespace SRTSubtitleConverter.Parsers
                                 {
                                     var item = new SubtitleItem
                                     {
-                                        StartTime = start,
-                                        EndTime = end,
-                                        Text = ConvertString(textLine)
+                                        StartTime = start, EndTime = end, Text = ConvertString(textLine)
                                     };
                                     items.Add(item);
                                 }
@@ -115,7 +113,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var resFormat = ParseFormat(path, encoding, out var data);
 
-            if (!resFormat) return string.Empty;
+            if (!resFormat)
+            {
+                return string.Empty;
+            }
 
             var finalString = "";
 
@@ -130,7 +131,10 @@ namespace SRTSubtitleConverter.Parsers
 
                 var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
 
-                if (i != data.Count - 1) format += "\r\n\r\n";
+                if (i != data.Count - 1)
+                {
+                    format += "\r\n\r\n";
+                }
 
                 finalString += format;
             }
