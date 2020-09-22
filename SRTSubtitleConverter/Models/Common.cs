@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SRTSubtitleConverter.Models
 {
@@ -15,6 +16,10 @@ namespace SRTSubtitleConverter.Models
         }
 
         public long StartTime { get; set; }
+        /// <summary>
+        /// End time in milliseconds.
+        /// </summary>
+        public long EndTime { get; set; }
         public string Text { get; set; }
     }
 }

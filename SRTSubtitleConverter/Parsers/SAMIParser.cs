@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using SRTSubtitleConverter.Models;
+using UtfUnknown;
 
 namespace SRTSubtitleConverter.Parsers
 {
@@ -130,5 +131,45 @@ namespace SRTSubtitleConverter.Parsers
                 return str;
             }
         }
+
+        public string ToSRT(string path)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var result = CharsetDetector.DetectFromFile(path);
+            var encoding = Encoding.GetEncoding(result.Detected.EncodingName);
+
+            var resFormat = ParseFormat(path, encoding, out var data);
+
+            if (resFormat)
+            {
+                var finalString = "";
+
+                for (var i = 0; i < data.Count; i++)
+                {
+                    var number = i;
+                    var startTime = Converters.ConvertMilliSecondsToString(data[i].StartTime);
+
+                    var endTime = i == data.Count - 1
+                        ? Converters.ConvertMilliSecondsToString(data[i].StartTime + 1000)
+                        : Converters.ConvertMilliSecondsToString(data[i + 1].StartTime);
+
+                    var text = data[i].Text;
+
+                    var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
+
+                    if (i != data.Count - 1) format += "\r\n\r\n";
+
+                    finalString += format;
+                }
+
+                return finalString;
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
+        
     }
 }

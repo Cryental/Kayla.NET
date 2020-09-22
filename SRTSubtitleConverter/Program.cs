@@ -19,9 +19,9 @@ namespace SRTSubtitleConverter
 
             var encoding = Encoding.GetEncoding(result.Detected.EncodingName);
 
-            var getSomething = new SAMIParser().ParseFormat(path, encoding, out var fresult);
-
-            File.WriteAllText("sub.srt", Converters.ToSRT(fresult), Encoding.UTF8);
+            var getSomething = new MicroDVDParser().ToSRT(path);
+            File.WriteAllText("sub.srt", getSomething);
+            Console.WriteLine("DONE");
 
             Console.ReadKey();
         }
