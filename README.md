@@ -2,6 +2,8 @@
 <p>
     <a href="https://github.com/Cryental/SRTSubtitleConverter/blob/master/LICENSE" alt="License">
         <img src="https://img.shields.io/github/license/Cryental/SRTSubtitleConverter" /></a>
+
+<a href="https://www.codacy.com/manual/contact_147/SRTSubtitleConverter/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Cryental/SRTSubtitleConverter&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/0b183ef94ad04daea604dba749406e18"/></a>
 </p>
 
 This tool can quickly convert subtitles to SubRip (SRT) format.
