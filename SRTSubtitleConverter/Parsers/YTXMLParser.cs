@@ -30,6 +30,7 @@ namespace SRTSubtitleConverter.Parsers
                 var nodeList = xmlDoc.DocumentElement.SelectNodes("//text");
 
                 if (nodeList != null)
+                {
                     for (var i = 0; i < nodeList.Count; i++)
                     {
                         var node = nodeList[i];
@@ -54,6 +55,7 @@ namespace SRTSubtitleConverter.Parsers
                             return false;
                         }
                     }
+                }
             }
 
             if (items.Any())
@@ -75,7 +77,10 @@ namespace SRTSubtitleConverter.Parsers
 
             var resFormat = ParseFormat(path, encoding, out var data);
 
-            if (!resFormat) return string.Empty;
+            if (!resFormat)
+            {
+                return string.Empty;
+            }
 
             var finalString = "";
 
@@ -90,7 +95,10 @@ namespace SRTSubtitleConverter.Parsers
 
                 var format = $"{number}\r\n{startTime} --> {endTime}\r\n{text}";
 
-                if (i != data.Count - 1) format += "\r\n\r\n";
+                if (i != data.Count - 1)
+                {
+                    format += "\r\n\r\n";
+                }
 
                 finalString += format;
             }
