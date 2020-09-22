@@ -35,9 +35,9 @@ Tested with Ubuntu 20.04.
 ### macOS:
 Download `SRTSubtitleConverter-macOS` from Releases and run following commands:
 ```
-$ ./SRTSubtitleConverter-Linux
+$ ./SRTSubtitleConverter-macOS
 ```
-Tested with Ubuntu 20.04.
+Tested with macOS 10.15.
 
 ## How To Use
 ```
