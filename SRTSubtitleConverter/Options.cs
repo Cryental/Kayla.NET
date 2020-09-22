@@ -12,6 +12,6 @@ namespace SRTSubtitleConverter
 
         [Option('b', "batch", Required = false,
             HelpText = "Set if you want to convert all supported files in a folder.")]
-        public bool FolderFlag { get; set; }
+        public bool BatchProcess { get; set; }
     }
 }

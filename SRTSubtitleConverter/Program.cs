@@ -14,13 +14,13 @@ namespace SRTSubtitleConverter
 
             var input = "";
             var output = "";
-            var folderFlag = false;
+            var batchProcess = false;
 
             Parser.Default.ParseArguments<Options>(args).WithParsed(o =>
             {
                 input = o.Input;
                 output = o.Output;
-                folderFlag = o.FolderFlag;
+                batchProcess = o.BatchProcess;
             });
 
             if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(output))
@@ -28,7 +28,9 @@ namespace SRTSubtitleConverter
                 return;
             }
 
-            if (folderFlag)
+            var processingHandler = new ProcessingHandler();
+
+            if (batchProcess)
             {
                 if (!Directory.Exists(input))
                 {
@@ -42,51 +44,31 @@ namespace SRTSubtitleConverter
                     return;
                 }
 
-                var processingHandler = new ProcessingHandler();
                 processingHandler.ConvertBathToSRT(input, output);
             }
             else
             {
                 if (!File.Exists(input))
                 {
-                    Console.WriteLine("[!] The input file is not a file or does not exist.");
-                    return;
-                }
-
-                var processingHandler = new ProcessingHandler();
-
-                try
-                {
-                    if (!Directory.Exists(Path.GetDirectoryName(input)))
-                    {
-                        Console.WriteLine("[!] The output path does not exist.");
-                        return;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("[!] The output path does not exist.");
-                    return;
+                    Console.WriteLine("[!] The input file does not exist.");
                 }
 
                 if (Directory.Exists(output))
                 {
-                    var result = processingHandler.ConvertToSRT(input, output, true);
+                    var fileName = Path.GetFileNameWithoutExtension(input) + ".srt";
+                    var finalPath = Path.Combine(output, fileName);
 
-                    if (!result)
-                    {
-                        Console.WriteLine("[!] This file is an unsupported format.");
-                    }
+                    processingHandler.ConvertToSRT(input, finalPath);
+                    return;
                 }
-                else
+
+                if (File.Exists(output))
                 {
-                    var result = processingHandler.ConvertToSRT(input, output);
-
-                    if (!result)
-                    {
-                        Console.WriteLine("[!] This file is an unsupported format.");
-                    }
+                    processingHandler.ConvertToSRT(input, output);
+                    return;
                 }
+
+                Console.WriteLine("[!] The output file or directory does not exist.");
             }
         }
     }
