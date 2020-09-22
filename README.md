@@ -17,7 +17,7 @@ It removes all custom styles and comments from the original file so you will get
 - SubViewer 2.0
 - WebVTT (Web Video Text Tracks)
 - Youtube Specific XML Format
-- TTML
+- Timed Text Markup Language
 
 ### Bundled Automatic Encoding Converter 
 You don't need to worry about encoding problem anymore. 
@@ -30,7 +30,7 @@ You can convert all supported formats with one command line.
 ## Downloads
 
 ### Windows:
-Download `SRTSubtitleConverter-Win64.exe`.
+Download `SRTSubtitleConverter-Win64.exe` from Releases and run.
 
 ### Linux:
 Download `SRTSubtitleConverter-Linux` from Releases and run following commands:
