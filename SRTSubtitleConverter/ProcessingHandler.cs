@@ -30,7 +30,7 @@ namespace SRTSubtitleConverter
 
             if (folderFlag)
             {
-                outputFilePath = Path.Combine(outputPath, $"{Path.GetFileNameWithoutExtension(inputPath)}.srt");
+                outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(inputPath) + ".srt");
             }
 
             foreach (var sf in _supportedFormats)
@@ -52,13 +52,14 @@ namespace SRTSubtitleConverter
                 }
             }
 
+
             if (string.IsNullOrEmpty(finalResult))
             {
                 return false;
             }
 
             File.WriteAllText(outputFilePath, finalResult, Encoding.UTF8);
-            Console.WriteLine($"[-] {Path.GetFileName(inputPath)}");
+            Console.WriteLine($"[+] Converted File: {Path.GetFileName(inputPath)}");
             Console.WriteLine("[*] The operation is completed.");
             return true;
         }
@@ -72,7 +73,7 @@ namespace SRTSubtitleConverter
 
             foreach (var f in files.GetFiles())
             {
-                var outputFilePath = Path.Combine(outputPath, $"{Path.GetFileNameWithoutExtension(inputPath)}.srt");
+                var outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(f.Name) + ".srt");
                 var finalResult = string.Empty;
 
                 foreach (var sf in _supportedFormats)
