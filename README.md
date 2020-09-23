@@ -30,7 +30,7 @@ You can convert all supported formats with one command line.
 ## Downloads
 
 ### Windows
-Download `Kayla.NET.exe` from Releases and run.
+Download `Kayla.NET-Win64.exe` from Releases and run.
 
 ### Linux
 Download `Kayla.NET-Linux` from Releases and run following commands:
