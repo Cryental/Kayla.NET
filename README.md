@@ -19,8 +19,8 @@ It removes all custom styles and comments from the original file so you will get
 - Youtube Specific XML Format
 - Timed Text Markup Language
 
-### Bundled Automatic Encoding Converter 
-You don't need to worry about encoding problem anymore. 
+### Automatic Encoding Converter 
+You don't need to worry about encoding problem anymore such as EUC-KR.
 
 This software will detect your subtitle encoding type and convert into UTF-8 automatically.
 
