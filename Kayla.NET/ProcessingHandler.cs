@@ -31,6 +31,7 @@ namespace Kayla.NET
             _supportedConverters.Add("SAMI", new SAMIConverter());
             _supportedConverters.Add("SubStationAlpha", new SSAConverter());
             _supportedConverters.Add("SubViewer", new SubViewerConverter());
+            _supportedConverters.Add("WebVTT", new VTTConverter());
             _supportedConverters.Add("SubRip", new SRTConverter());
         }
 
@@ -64,9 +65,9 @@ namespace Kayla.NET
 
             var finalResult = string.Empty;
 
-            foreach (var sf in _supportedParsers)
+            foreach (var (key, value) in _supportedParsers)
             {
-                var extensions = sf.Value.FileExtension.Split('|');
+                var extensions = value.FileExtension.Split('|');
 
                 foreach (var ext in extensions)
                 {
@@ -75,7 +76,7 @@ namespace Kayla.NET
                         continue;
                     }
 
-                    var parsingStatus = sf.Value.ParseFormat(inputPath, out var parsedData);
+                    var parsingStatus = value.ParseFormat(inputPath, out var parsedData);
 
                     if (!parsingStatus)
                     {
@@ -125,8 +126,7 @@ namespace Kayla.NET
                 return false;
             }
 
-            var selectedConverter = _supportedConverters.Where(converter => converter.Key == format)
-                .Select(converter => converter.Value).FirstOrDefault();
+            var selectedConverter = _supportedConverters.Where(converter => converter.Key == format).Select(converter => converter.Value).FirstOrDefault();
 
             if (selectedConverter == null)
             {
@@ -159,7 +159,7 @@ namespace Kayla.NET
                         var parsingStatus = value.ParseFormat(inputPath, out var parsedData);
 
                         if (!parsingStatus)
-                        {
+                        {  
                             continue;
                         }
 

@@ -25,7 +25,6 @@ namespace Kayla.NET
                 batchProcess = o.BatchProcess;
             });
 
-            Console.WriteLine(output);
             if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(output))
             {
                 return;
