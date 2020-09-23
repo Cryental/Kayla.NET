@@ -60,4 +60,5 @@ This software will work with Windows, Linux and macOS without any additional sof
 
 ## Disclaimer
 This software is licensed by GPL-3.0 License.
+
 Some code snippets are from https://github.com/AlexPoint/SubtitlesParser.
