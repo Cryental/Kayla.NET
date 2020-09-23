@@ -26,7 +26,7 @@ namespace SRTSubtitleConverter.Converters
                         .Replace("\n", "<br>");
                 }
 
-                ConvertedItems.Add($"<SYNC Start={f.StartTime}><P>{finalResult})";
+                ConvertedItems.Add($"<SYNC Start={f.StartTime}><P>{finalResult}");
             }
 
             var listedItems = string.Join(Environment.NewLine, ConvertedItems.ToArray());
