@@ -30,7 +30,7 @@ namespace SRTSubtitleConverter.Converters
             }
 
             var listedItems = string.Join(Environment.NewLine, ConvertedItems.ToArray());
-            var finalOutput = var template = $@"<SAMI>
+            var finalOutput = $@"<SAMI>
 <HEAD>
 <TITLE></TITLE>
 </HEAD>
