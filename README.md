@@ -82,4 +82,4 @@ This software is licensed by GPL-3.0 License.
 Some code snippets are from https://github.com/AlexPoint/SubtitlesParser.
 
 ### Under Development
-This software is under development. We are currently supporting MicroDVD, SAMI, SubStationAlpha, SubViewer and SubRip as a output format for now.
+We are currently supporting MicroDVD, SAMI, SubStationAlpha, SubViewer and SubRip as a output format for now.
