@@ -50,7 +50,7 @@ namespace SRTSubtitleConverter
                             continue;
                         }
 
-                        var srtConverter = new SAMIConverter();
+                        var srtConverter = new SRTConverter();
                         var result = srtConverter.Convert(parsedData);
 
                         if (!string.IsNullOrEmpty(result))
