@@ -50,6 +50,7 @@ Tested with macOS 10.15.
 
 ## How To Use
 ```
+Syntax:
   -i, --input     Required. Set the files or folders to be converted.
 
   -o, --output    Required. Set the path to save the converted files.
@@ -65,6 +66,9 @@ Tested with macOS 10.15.
                   SubRip (*.srt)
 
   -b, --batch     Set if you want to convert all supported files in a folder.
+  
+Example:
+$ Kayla.NET -f SubRip -i "/path/to/folder/sub.smi" -o "C:\Users\conta\Pictures"
 ```
 
 ## Requirements
