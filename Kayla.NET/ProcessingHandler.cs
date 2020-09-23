@@ -31,6 +31,7 @@ namespace Kayla.NET
             _supportedConverters.Add("SAMI", new SAMIConverter());
             _supportedConverters.Add("SubStationAlpha", new SSAConverter());
             _supportedConverters.Add("SubViewer", new SubViewerConverter());
+            _supportedConverters.Add("TimedText", new TTMLConverter());
             _supportedConverters.Add("WebVTT", new VTTConverter());
             _supportedConverters.Add("SubRip", new SRTConverter());
         }
