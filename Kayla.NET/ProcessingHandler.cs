@@ -36,7 +36,7 @@ namespace Kayla.NET
             _supportedConverters.Add("SubRip", new SRTConverter());
         }
 
-        public bool Convert(string inputPath, string outputPath, string format = "SubRip")
+        public bool Convert(string inputPath, string outputPath, string format = "SubRip", int sync = 0)
         {
             if (format == string.Empty)
             {
@@ -108,7 +108,7 @@ namespace Kayla.NET
             return true;
         }
 
-        public bool ConvertBath(string inputPath, string outputPath, string format = "SubRip")
+        public bool ConvertBath(string inputPath, string outputPath, string format = "SubRip", int sync = 0)
         {
             if (format == string.Empty)
             {
@@ -165,7 +165,7 @@ namespace Kayla.NET
                             continue;
                         }
 
-                        var result = selectedConverter.Convert(parsedData);
+                        var result = selectedConverter.Convert(Filters.AdjustSyncTime(sync, parsedData));
 
                         if (string.IsNullOrEmpty(result))
                         {
