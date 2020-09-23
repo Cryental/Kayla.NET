@@ -6,6 +6,9 @@ namespace SRTSubtitleConverter.Converters
 {
     public class SRTConverter : ISubtitleConverter
     {
+        public string Command { get; set; } = "srt";
+        public string FileExtension { get; set; } = ".srt";
+
         public string Convert(List<SubtitleItem> data)
         {
             var finalString = "";

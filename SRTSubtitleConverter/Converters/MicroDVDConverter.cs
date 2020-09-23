@@ -8,6 +8,8 @@ namespace SRTSubtitleConverter.Converters
     public class MicroDVDConverter : ISubtitleConverter
     {
         public readonly float DefaultFrameRate = 23.976f;
+        public string Command { get; set; } = "microdvd";
+        public string FileExtension { get; set; } = ".sub";
 
         public string Convert(List<SubtitleItem> data)
         {

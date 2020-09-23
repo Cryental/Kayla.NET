@@ -19,8 +19,8 @@
             Text = text;
         }
 
-        public long StartTime { get; set; }
-        public long EndTime { get; set; }
+        public long StartTime { get; set; } // Frame Count
+        public long EndTime { get; set; } // Frame Count
         public string Text { get; set; }
     }
 }

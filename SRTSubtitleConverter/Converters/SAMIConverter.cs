@@ -8,6 +8,8 @@ namespace SRTSubtitleConverter.Converters
 {
     public class SAMIConverter : ISubtitleConverter
     {
+        public string Command { get; set; } = "sami";
+        public string FileExtension { get; set; } = ".smi";
         public string Convert(List<SubtitleItem> data)
         {
             return $@"<SAMI>

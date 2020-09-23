@@ -9,6 +9,9 @@ namespace SRTSubtitleConverter.Converters
 {
     public class SSAConverter : ISubtitleConverter
     {
+        public string Command { get; set; } = "ssa";
+        public string FileExtension { get; set; } = ".ass";
+
         public string Convert(List<SubtitleItem> data)
         {
             var filteredItems = new List<string>();
