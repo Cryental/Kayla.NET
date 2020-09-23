@@ -1,9 +1,0 @@
-{
-	"profiles": {
-		"Kayla.NET": {
-			"commandName": "Project",
-			"commandLineArgs":
-				"-f \"TimedText\" -b -i \"E:\\[Cerberus] Steins;Gate + Steins;Gate 0 +  Special + Movie [BD 1080p HEVC 10-bit AAC]\\Steins;Gate\\Season 1\" -o \"C:\\Users\\conta\\Documents\\New folder\""
-		}
-	}
-}
