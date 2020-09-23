@@ -16,7 +16,7 @@ It removes all custom styles and comments from the original file so you will get
 - MicroDVD
 - SubViewer 2.0
 - WebVTT (Web Video Text Tracks)
-- Youtube Specific XML Format
+- Youtube Specific XML Format (Read-Only)
 - Timed Text Markup Language
 
 ### Automatic Encoding Converter 
