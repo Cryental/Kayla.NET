@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 
-namespace SRTSubtitleConverter.Parsers
+namespace Kayla.NET.Parsers
 {
     public interface ISubtitleParser
     {

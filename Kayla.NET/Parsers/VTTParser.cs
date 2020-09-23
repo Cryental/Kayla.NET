@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 using UtfUnknown;
 
-namespace SRTSubtitleConverter.Parsers
+namespace Kayla.NET.Parsers
 {
     public class VTTParser : ISubtitleParser
     {

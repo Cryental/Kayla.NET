@@ -7,13 +7,17 @@
 		<VersionPrefix>1.1.7</VersionPrefix>
 		<Authors>Cryental</Authors>
 		<Company>Volistx Team</Company>
-		<Product>SRTSubtitleConverter</Product>
+		<Product>Kayla.NET</Product>
 		<Copyright>Developed By @Cryental, GPLv3.0</Copyright>
 		<Description>This tool can quickly convert subtitles format from one format to SubRip (SRT) format.</Description>
 		<RuntimeIdentifiers>win-x64;osx.10.15-x64;ubuntu.18.04-x64</RuntimeIdentifiers>
 		<PublishSingleFile>true</PublishSingleFile>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-		<Version>1.1.9</Version>
+		<Version>1.2.1</Version>
+		<PackageId>Kayla.NET</PackageId>
+		<RootNamespace>Kayla.NET</RootNamespace>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<ItemGroup>

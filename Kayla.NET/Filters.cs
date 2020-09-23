@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 
-namespace SRTSubtitleConverter
+namespace Kayla.NET
 {
     public static class Filters
     {

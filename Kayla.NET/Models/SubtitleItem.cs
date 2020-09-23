@@ -1,4 +1,4 @@
-﻿namespace SRTSubtitleConverter.Models
+﻿namespace Kayla.NET.Models
 {
     public class SubtitleItem
     {

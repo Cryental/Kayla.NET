@@ -2,40 +2,44 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using SRTSubtitleConverter.Converters;
-using SRTSubtitleConverter.Parsers;
+using Kayla.NET.Converters;
+using Kayla.NET.Parsers;
 
-namespace SRTSubtitleConverter
+namespace Kayla.NET
 {
     public class ProcessingHandler
     {
-        private readonly Dictionary<string, ISubtitleParser> _supportedFormats =
+        private readonly Dictionary<string, ISubtitleParser> _supportedParsers =
             new Dictionary<string, ISubtitleParser>();
+
+        private readonly Dictionary<string, ISubtitleConverter> _supportedConverters =
+            new Dictionary<string, ISubtitleConverter>();
 
         public ProcessingHandler()
         {
-            _supportedFormats.Add("MicroDVD", new MicroDVDParser());
-            _supportedFormats.Add("SAMI", new SAMIParser());
-            _supportedFormats.Add("SubStation Alpha", new SSAParser());
-            _supportedFormats.Add("SubViewer 2.0", new SubViewerParser());
-            _supportedFormats.Add("Timed Text", new TTMLParser());
-            _supportedFormats.Add("WebVTT", new VTTParser());
-            _supportedFormats.Add("Youtube Subtitle XML", new YtXmlParser());
-            _supportedFormats.Add("SubRip", new SRTParser());
+            _supportedParsers.Add("MicroDVD", new MicroDVDParser());
+            _supportedParsers.Add("SAMI", new SAMIParser());
+            _supportedParsers.Add("SubStationAlpha", new SSAParser());
+            _supportedParsers.Add("SubViewer", new SubViewerParser());
+            _supportedParsers.Add("TimedText", new TTMLParser());
+            _supportedParsers.Add("WebVTT", new VTTParser());
+            _supportedParsers.Add("YtXml", new YtXmlParser());
+            _supportedParsers.Add("SubRip", new SRTParser());
+
+            _supportedConverters.Add("MicroDVD", new MicroDVDConverter());
+            _supportedConverters.Add("SAMI", new SAMIConverter());
+            _supportedConverters.Add("SubStationAlpha", new SSAConverter());
+            _supportedConverters.Add("SubViewer", new SubViewerConverter());
+            _supportedConverters.Add("SubRip", new SRTConverter());
         }
 
-        public bool ConvertToSRT(string inputPath, string outputPath, bool folderFlag = false)
+        public bool ConvertToSRT(string inputPath, string outputPath)
         {
             var finalResult = string.Empty;
 
             var outputFilePath = outputPath;
 
-            if (folderFlag)
-            {
-                outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(inputPath) + ".srt");
-            }
-
-            foreach (var sf in _supportedFormats)
+            foreach (var sf in _supportedParsers)
             {
                 var extensions = sf.Value.FileExtension.Split('|');
 
@@ -50,7 +54,7 @@ namespace SRTSubtitleConverter
                             continue;
                         }
 
-                        var srtConverter = new SRTConverter();
+                        var srtConverter = new SubViewerConverter();
                         var result = srtConverter.Convert(parsedData);
 
                         if (!string.IsNullOrEmpty(result))
@@ -86,7 +90,7 @@ namespace SRTSubtitleConverter
                 var outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(f.Name) + ".srt");
                 var finalResult = string.Empty;
 
-                foreach (var sf in _supportedFormats)
+                foreach (var sf in _supportedParsers)
                 {
                     var extensions = sf.Value.FileExtension.Split('|');
 

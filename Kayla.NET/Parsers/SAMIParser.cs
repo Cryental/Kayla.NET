@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 using UtfUnknown;
 
-namespace SRTSubtitleConverter.Parsers
+namespace Kayla.NET.Parsers
 {
     public class SAMIParser : ISubtitleParser
     {

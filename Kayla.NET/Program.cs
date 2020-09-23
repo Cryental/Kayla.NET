@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using CommandLine;
 
-namespace SRTSubtitleConverter
+namespace Kayla.NET
 {
     internal class Program
     {

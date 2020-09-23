@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 
-namespace SRTSubtitleConverter.Converters
+namespace Kayla.NET.Converters
 {
     public class SSAConverter : ISubtitleConverter
     {
-        public string Command { get; set; } = "ssa";
         public string FileExtension { get; set; } = ".ass";
 
         public string Convert(List<SubtitleItem> data)

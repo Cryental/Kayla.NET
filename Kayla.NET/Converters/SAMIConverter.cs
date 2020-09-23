@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 
-namespace SRTSubtitleConverter.Converters
+namespace Kayla.NET.Converters
 {
     public class SAMIConverter : ISubtitleConverter
     {
-        public string Command { get; set; } = "sami";
         public string FileExtension { get; set; } = ".smi";
         public string Convert(List<SubtitleItem> data)
         {

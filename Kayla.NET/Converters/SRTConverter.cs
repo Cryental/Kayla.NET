@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using SRTSubtitleConverter.Models;
+using Kayla.NET.Models;
 
-namespace SRTSubtitleConverter.Converters
+namespace Kayla.NET.Converters
 {
     public class SRTConverter : ISubtitleConverter
     {
-        public string Command { get; set; } = "srt";
         public string FileExtension { get; set; } = ".srt";
 
         public string Convert(List<SubtitleItem> data)
