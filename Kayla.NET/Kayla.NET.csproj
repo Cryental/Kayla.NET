@@ -10,7 +10,7 @@
 		<Product>Kayla.NET</Product>
 		<Copyright>Developed By @Cryental, GPLv3.0</Copyright>
 		<Description>This tool can quickly convert subtitles format from one format to SubRip (SRT) format.</Description>
-		<RuntimeIdentifiers>win-x64;osx.10.15-x64;ubuntu.18.04-x64</RuntimeIdentifiers>
+		<RuntimeIdentifiers>win-x64;osx.10.15-x64;ubuntu.20.04-x64</RuntimeIdentifiers>
 		<PublishSingleFile>true</PublishSingleFile>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<Version>1.2.1</Version>
