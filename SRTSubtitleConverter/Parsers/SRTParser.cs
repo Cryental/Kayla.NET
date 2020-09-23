@@ -75,7 +75,7 @@ namespace SRTSubtitleConverter.Parsers
 
                 if (items.Any())
                 {
-                    result = items;
+                    result = Filters.RemoveDuplicateItems(items);
                     return true;
                 }
 

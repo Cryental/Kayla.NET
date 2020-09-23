@@ -1,8 +1,8 @@
 {
-  "profiles": {
-    "SRTSubtitleConverter": {
-      "commandName": "Project",
-      "commandLineArgs": "-i sub.smi -o sub2.smi"
-    }
-  }
+	"profiles": {
+		"SRTSubtitleConverter": {
+			"commandName": "Project",
+			"commandLineArgs": "-i sub.smi -o sub2.smi"
+		}
+	}
 }

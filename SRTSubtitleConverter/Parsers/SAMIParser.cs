@@ -139,7 +139,7 @@ namespace SRTSubtitleConverter.Parsers
                 items[i].EndTime = endTime;
             }
 
-            result = items;
+            result = Filters.RemoveDuplicateItems(items);
             return true;
         }
 

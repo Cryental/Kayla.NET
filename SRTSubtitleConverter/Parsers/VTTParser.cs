@@ -72,7 +72,7 @@ namespace SRTSubtitleConverter.Parsers
                     }
                 }
 
-                result = items;
+                result = Filters.RemoveDuplicateItems(items);
                 return true;
             }
 
