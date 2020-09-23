@@ -67,8 +67,10 @@ Syntax:
 
   -b, --batch     Set if you want to convert all supported files in a folder.
   
+  Batch Convert: $ Kayla.NET --batch --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output" 
+  Single File Convert: $ Kayla.NET --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
 Example:
-$ Kayla.NET -f SubRip -i "/path/to/folder/sub.smi" -o "/path/to/folder/output/"
+  $ Kayla.NET SubRip --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
 ```
 
 ## Requirements
