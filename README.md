@@ -64,6 +64,8 @@ Syntax:
                   WebVTT (*.vtt)
                   SubRip (*.srt)
 
+  -s, --sync      Set seconds to adjust subtitle sync. e.g: 3 or -3
+  
   -b, --batch     Set if you want to convert all supported files in a folder.
   
   Batch Convert: $ Kayla.NET --batch --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output" 
