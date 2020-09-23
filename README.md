@@ -58,9 +58,9 @@ Syntax:
   -f, --format    Set the output format. The default value is SubRip. You can use following formats:
                   MicroDVD (*.sub)
                   SAMI (*.smi)
-                  SubStationAlpha (*.ass, *.ssa)
+                  SubStationAlpha (*.ass)
                   SubViewer (*.sub)
-                  TimedText (*.xml, *.ttml)
+                  TimedText (*.xml)
                   WebVTT (*.vtt)
                   SubRip (*.srt)
 
