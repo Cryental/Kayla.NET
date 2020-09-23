@@ -4,7 +4,7 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Nullable>disable</Nullable>
-		<VersionPrefix>1.2.1</VersionPrefix>
+		<VersionPrefix>1.2.2</VersionPrefix>
 		<Authors>Cryental</Authors>
 		<Company>Volistx Team</Company>
 		<Product>Kayla.NET</Product>
@@ -13,7 +13,7 @@
 		<RuntimeIdentifiers>win-x64;osx.10.15-x64;ubuntu.18.04-x64</RuntimeIdentifiers>
 		<PublishSingleFile>true</PublishSingleFile>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-		<Version>1.2.1</Version>
+		<Version>1.2.2</Version>
 		<PackageId>Kayla.NET</PackageId>
 		<RootNamespace>Kayla.NET</RootNamespace>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
