@@ -62,7 +62,6 @@ Syntax:
                   SubViewer (*.sub)
                   TimedText (*.xml, *.ttml)
                   WebVTT (*.vtt)
-                  YtXml (*.xml)
                   SubRip (*.srt)
 
   -b, --batch     Set if you want to convert all supported files in a folder.
