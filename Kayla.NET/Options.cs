@@ -6,7 +6,7 @@ namespace Kayla.NET
     {
         [Option('f', "format", Required = true,
             HelpText =
-                "Set the output format. The default value is SubRip. You can use following formats:\r\nMicroDVD (*.sub)\r\nSAMI (*.smi)\r\nSubStationAlpha (*.ass, *.ssa)\r\nSubViewer (*.sub)\r\nTimedText (*.xml, *.ttml)\r\nWebVTT (*.vtt)\r\nSubRip (*.srt)")]
+                "Set the output format. The default value is SubRip. You can use following formats:\r\nMicroDVD (*.sub)\r\nSAMI (*.smi)\r\nSubStationAlpha (*.ass)\r\nSubViewer (*.sub)\r\nTimedText (*.xml)\r\nWebVTT (*.vtt)\r\nSubRip (*.srt)")]
         public string Format { get; set; }
 
         [Option('i', "input", Required = true,
