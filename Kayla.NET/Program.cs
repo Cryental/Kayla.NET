@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 using CommandLine;
 
@@ -24,6 +23,7 @@ namespace Kayla.NET
                 format = o.Format;
                 batchProcess = o.BatchProcess;
             });
+
 
             if (string.IsNullOrEmpty(input) || string.IsNullOrEmpty(output))
             {

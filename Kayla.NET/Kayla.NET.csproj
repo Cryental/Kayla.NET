@@ -4,7 +4,7 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Nullable>disable</Nullable>
-		<VersionPrefix>1.1.7</VersionPrefix>
+		<VersionPrefix>1.2.1</VersionPrefix>
 		<Authors>Cryental</Authors>
 		<Company>Volistx Team</Company>
 		<Product>Kayla.NET</Product>

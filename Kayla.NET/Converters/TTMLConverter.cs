@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 using Kayla.NET.Models;
 
@@ -9,6 +8,7 @@ namespace Kayla.NET.Converters
     public class TTMLConverter : ISubtitleConverter
     {
         public string FileExtension { get; set; } = ".xml";
+
         public string Convert(List<SubtitleItem> data)
         {
             var filteredItems = new List<string>();
@@ -28,7 +28,7 @@ namespace Kayla.NET.Converters
 
                 var startTime = new TimeSpan(f.StartTime * 10000).TotalSeconds;
                 var endTime = new TimeSpan(f.EndTime * 10000).TotalSeconds;
-                
+
                 filteredItems.Add($"		<p begin=\"{startTime}s\" xml:id=\"p{index}\" end=\"{endTime}s\">{result}</p>");
             }
 

@@ -9,6 +9,7 @@ namespace Kayla.NET.Converters
     public class SAMIConverter : ISubtitleConverter
     {
         public string FileExtension { get; set; } = ".smi";
+
         public string Convert(List<SubtitleItem> data)
         {
             return $@"<SAMI>

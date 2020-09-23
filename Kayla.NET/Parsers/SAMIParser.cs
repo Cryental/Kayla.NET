@@ -77,6 +77,11 @@ namespace Kayla.NET.Parsers
                     continue;
                 }
 
+                if (line.Contains("<!--") && line.Contains("-->"))
+                {
+                    continue;
+                }
+
                 if (line.Contains("<!--"))
                 {
                     sbComment = true;
@@ -111,14 +116,11 @@ namespace Kayla.NET.Parsers
                     miClassString[1] = miClassString[1].Remove(splitIndex);
                     var miSync = miClassString[0].Split('=');
 
-                    sb.Append(line);
-
                     while ((line = sr.ReadLine())?.ToUpper().Contains("<SYNC", StringComparison.OrdinalIgnoreCase) ==
                            false)
                     {
                         sb.Append(line);
                     }
-
 
                     items.Add(new SubtitleItem(int.Parse(miSync[1]), ConvertString(sb.ToString())));
 
@@ -148,6 +150,9 @@ namespace Kayla.NET.Parsers
             str = str.Replace("<br>", "\n");
             str = str.Replace("<BR>", "\n");
             str = str.Replace("&nbsp;", "");
+            str = str.Replace("<--", "");
+            str = str.Replace("<!--", "");
+            str = str.Replace("-->", "");
 
             try
             {

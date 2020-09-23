@@ -127,7 +127,8 @@ namespace Kayla.NET
                 return false;
             }
 
-            var selectedConverter = _supportedConverters.Where(converter => converter.Key == format).Select(converter => converter.Value).FirstOrDefault();
+            var selectedConverter = _supportedConverters.Where(converter => converter.Key == format)
+                .Select(converter => converter.Value).FirstOrDefault();
 
             if (selectedConverter == null)
             {
@@ -157,15 +158,14 @@ namespace Kayla.NET
                             continue;
                         }
 
-                        var parsingStatus = value.ParseFormat(inputPath, out var parsedData);
+                        var parsingStatus = value.ParseFormat(f.FullName, out var parsedData);
 
                         if (!parsingStatus)
-                        {  
+                        {
                             continue;
                         }
 
-                        var srtConverter = new SRTConverter();
-                        var result = srtConverter.Convert(parsedData);
+                        var result = selectedConverter.Convert(parsedData);
 
                         if (string.IsNullOrEmpty(result))
                         {
@@ -180,7 +180,7 @@ namespace Kayla.NET
                 if (!string.IsNullOrEmpty(finalResult))
                 {
                     File.WriteAllText(outputFilePath, finalResult, Encoding.UTF8);
-                    convertedFiles.Add(f.Name);
+                    convertedFiles.Add(Path.GetFileName(outputFilePath));
                 }
                 else
                 {
@@ -191,16 +191,6 @@ namespace Kayla.NET
             Console.WriteLine("[+] Converted Files ---");
             Console.WriteLine();
             foreach (var f in convertedFiles)
-            {
-                Console.WriteLine($"[-] {f}");
-            }
-
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("[+] Not Converted Files ---");
-            Console.WriteLine();
-            foreach (var f in unconvertedFiles)
             {
                 Console.WriteLine($"[-] {f}");
             }

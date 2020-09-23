@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 using Kayla.NET.Models;
 
 namespace Kayla.NET.Converters
@@ -9,6 +7,7 @@ namespace Kayla.NET.Converters
     public class SubViewerConverter : ISubtitleConverter
     {
         public string FileExtension { get; set; } = ".sub";
+
         public string Convert(List<SubtitleItem> data)
         {
             var finalString = "";
