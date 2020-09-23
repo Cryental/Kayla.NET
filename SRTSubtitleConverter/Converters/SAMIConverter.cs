@@ -26,32 +26,20 @@ namespace SRTSubtitleConverter.Converters
                         .Replace("\n", "<br>");
                 }
 
-                ConvertedItems.Add(GenerateItem(f.StartTime, finalResult));
+                ConvertedItems.Add($"<SYNC Start={f.StartTime}><P>{finalResult})";
             }
 
             var listedItems = string.Join(Environment.NewLine, ConvertedItems.ToArray());
-            var finalOutput = GenerateTemplate(listedItems);
-
-            return finalOutput;
-        }
-
-        private string GenerateTemplate(string bodyContent)
-        {
-            var template = $@"<SAMI>
+            var finalOutput = var template = $@"<SAMI>
 <HEAD>
 <TITLE></TITLE>
 </HEAD>
 <BODY>
-{bodyContent}
+{listedItems}
 </BODY>
 </SAMI>";
-            return template;
-        }
 
-        private string GenerateItem(long startTime, string text)
-        {
-            var template = $"<SYNC Start={startTime}><P>{text}";
-            return template;
+            return finalOutput;
         }
     }
 }
