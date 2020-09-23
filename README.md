@@ -4,7 +4,7 @@
         <img src="https://img.shields.io/github/license/Cryental/SRTSubtitleConverter" /></a>
 </p>
 
-This tool can quickly convert subtitles to SubRip (SRT) or any supported format.
+This subtitle converter can quickly convert subtitles to SubRip (SRT) or any supported format.
 
 It removes all custom styles and comments from the original file so you will get a clean subtitle.
 
