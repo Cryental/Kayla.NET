@@ -70,7 +70,7 @@ Syntax:
   Batch Convert: $ Kayla.NET --batch --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output" 
   Single File Convert: $ Kayla.NET --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
 Example:
-  $ Kayla.NET SubRip --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
+  $ Kayla.NET --format SubRip --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
 ```
 
 ## Requirements
