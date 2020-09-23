@@ -10,7 +10,7 @@ It removes all custom styles and comments from the original file so you will get
 
 ## Features
 
-### Support Subtitle File Format Conversion
+### Supported Subtitle File Format
 - SAMI (Synchronized Accessible Media Interchange)
 - SubStation Alpha (or ASS)
 - MicroDVD
@@ -30,7 +30,7 @@ You can convert all supported formats with one command line.
 ## Downloads
 
 ### Windows
-Download `Kayla.NET.exe` from Releases and run.
+Download `Kayla.NET-Win64.exe` from Releases and run.
 
 ### Linux
 Download `Kayla.NET-Linux` from Releases and run following commands:
@@ -70,7 +70,7 @@ Syntax:
   Batch Convert: $ Kayla.NET --batch --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output" 
   Single File Convert: $ Kayla.NET --format [Format] --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
 Example:
-  $ Kayla.NET SubRip --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
+  $ Kayla.NET --format SubRip --input "/path/to/folder/sub.smi" --output "/path/to/folder/output"
 ```
 
 ## Requirements
