@@ -1,16 +1,16 @@
-# SRTSubtitleConverter
+# Kayla.NET
 <p>
     <a href="https://github.com/Cryental/SRTSubtitleConverter/blob/master/LICENSE" alt="License">
         <img src="https://img.shields.io/github/license/Cryental/SRTSubtitleConverter" /></a>
 </p>
 
-This tool can quickly convert subtitles to SubRip (SRT) format.
+This tool can quickly convert subtitles to SubRip (SRT) or any supported format.
 
 It removes all custom styles and comments from the original file so you will get a clean subtitle.
 
 ## Features
 
-### Support Subtitles File Format Conversion
+### Support Subtitle File Format Conversion
 - SAMI (Synchronized Accessible Media Interchange)
 - SubStation Alpha (or ASS)
 - MicroDVD
@@ -30,29 +30,41 @@ You can convert all supported formats with one command line.
 ## Downloads
 
 ### Windows
-Download `SRTSubtitleConverter-Win64.exe` from Releases and run.
+Download `Kayla.NET.exe` from Releases and run.
 
 ### Linux
-Download `SRTSubtitleConverter-Linux` from Releases and run following commands:
+Download `Kayla.NET-Linux` from Releases and run following commands:
 ```
-$ chmod 777 SRTSubtitleConverter-Linux
-$ chmod +x SRTSubtitleConverter-Linux
-$ ./SRTSubtitleConverter-Linux
+$ chmod 777 Kayla.NET-Linux
+$ chmod +x Kayla.NET-Linux
+$ ./Kayla.NET-Linux
 ```
 Tested with Ubuntu 20.04.
 
 ### macOS
-Download `SRTSubtitleConverter-macOS` from Releases and run following commands:
+Download `Kayla.NET-macOS` from Releases and run following commands:
 ```
-$ ./SRTSubtitleConverter-macOS
+$ ./Kayla.NET-macOS
 ```
 Tested with macOS 10.15.
 
 ## How To Use
 ```
--i, --input      Required. Set the files or folders to be converted.
--o, --output     Required. Set the path to save the converted files.
--b, --batch      Set if you want to convert all supported files in a folder.
+  -i, --input     Required. Set the files or folders to be converted.
+
+  -o, --output    Required. Set the path to save the converted files.
+
+  -f, --format    Set the output format. The default value is SubRip. You can use following formats:
+                  MicroDVD (*.sub)
+                  SAMI (*.smi)
+                  SubStationAlpha (*.ass, *.ssa)
+                  SubViewer (*.sub)
+                  TimedText (*.xml, *.ttml)
+                  WebVTT (*.vtt)
+                  YtXml (*.xml)
+                  SubRip (*.srt)
+
+  -b, --batch     Set if you want to convert all supported files in a folder.
 ```
 
 ## Requirements
