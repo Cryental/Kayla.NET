@@ -10,7 +10,7 @@ It removes all custom styles and comments from the original file so you will get
 
 ## Features
 
-### Support Subtitle File Format Conversion
+### Supported Subtitle File Format
 - SAMI (Synchronized Accessible Media Interchange)
 - SubStation Alpha (or ASS)
 - MicroDVD
