@@ -47,15 +47,8 @@ namespace Kayla.NET
                 return false;
             }
 
-
-
-            ISubtitleConverter selectedConverter = null;
-
-            foreach (var converter in _supportedConverters.Where(converter => converter.Key == format))
-            {
-                selectedConverter = converter.Value;
-                break;
-            }
+            var selectedConverter = _supportedConverters.Where(converter => converter.Key == format)
+                .Select(converter => converter.Value).FirstOrDefault();
 
             if (selectedConverter == null)
             {
@@ -77,23 +70,27 @@ namespace Kayla.NET
 
                 foreach (var ext in extensions)
                 {
-                    if (Path.GetExtension(inputPath) == ext)
+                    if (Path.GetExtension(inputPath) != ext)
                     {
-                        var parsingStatus = sf.Value.ParseFormat(inputPath, out var parsedData);
-
-                        if (!parsingStatus)
-                        {
-                            continue;
-                        }
-
-                        var result = selectedConverter.Convert(parsedData);
-
-                        if (!string.IsNullOrEmpty(result))
-                        {
-                            finalResult = result;
-                            break;
-                        }
+                        continue;
                     }
+
+                    var parsingStatus = sf.Value.ParseFormat(inputPath, out var parsedData);
+
+                    if (!parsingStatus)
+                    {
+                        continue;
+                    }
+
+                    var result = selectedConverter.Convert(parsedData);
+
+                    if (string.IsNullOrEmpty(result))
+                    {
+                        continue;
+                    }
+
+                    finalResult = result;
+                    break;
                 }
             }
 
@@ -128,13 +125,8 @@ namespace Kayla.NET
                 return false;
             }
 
-            ISubtitleConverter selectedConverter = null;
-
-            foreach (var converter in _supportedConverters.Where(converter => converter.Key == format))
-            {
-                selectedConverter = converter.Value;
-                break;
-            }
+            var selectedConverter = _supportedConverters.Where(converter => converter.Key == format)
+                .Select(converter => converter.Value).FirstOrDefault();
 
             if (selectedConverter == null)
             {
@@ -149,12 +141,13 @@ namespace Kayla.NET
 
             foreach (var f in files.GetFiles())
             {
-                var outputFilePath = Path.Combine(outputPath, Path.GetFileNameWithoutExtension(f.Name) + selectedConverter.FileExtension);
+                var outputFilePath = Path.Combine(outputPath,
+                    Path.GetFileNameWithoutExtension(f.Name) + selectedConverter.FileExtension);
                 var finalResult = string.Empty;
 
-                foreach (var sf in _supportedParsers)
+                foreach (var (key, value) in _supportedParsers)
                 {
-                    var extensions = sf.Value.FileExtension.Split('|');
+                    var extensions = value.FileExtension.Split('|');
 
                     foreach (var ext in extensions)
                     {
@@ -163,7 +156,7 @@ namespace Kayla.NET
                             continue;
                         }
 
-                        var parsingStatus = sf.Value.ParseFormat(inputPath, out var parsedData);
+                        var parsingStatus = value.ParseFormat(inputPath, out var parsedData);
 
                         if (!parsingStatus)
                         {
