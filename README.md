@@ -68,7 +68,7 @@ Syntax:
   -b, --batch     Set if you want to convert all supported files in a folder.
   
 Example:
-$ Kayla.NET -f SubRip -i "/path/to/folder/sub.smi" -o "C:\Users\conta\Pictures"
+$ Kayla.NET -f SubRip -i "/path/to/folder/sub.smi" -o "/path/to/folder/output/"
 ```
 
 ## Requirements
