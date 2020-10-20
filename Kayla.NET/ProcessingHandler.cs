@@ -84,7 +84,7 @@ namespace Kayla.NET
                         continue;
                     }
 
-                    var result = selectedConverter.Convert(parsedData);
+                    var result = selectedConverter.Convert(Filters.AdjustSyncTime(sync, parsedData));
 
                     if (string.IsNullOrEmpty(result))
                     {
