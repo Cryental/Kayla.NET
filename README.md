@@ -35,7 +35,6 @@ Download `Kayla.NET-Win64.exe` from Releases and run.
 ### Linux
 Download `Kayla.NET-Linux` from Releases and run following commands:
 ```
-$ chmod 777 Kayla.NET-Linux
 $ chmod +x Kayla.NET-Linux
 $ ./Kayla.NET-Linux
 ```
